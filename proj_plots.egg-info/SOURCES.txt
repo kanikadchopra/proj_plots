@@ -1,0 +1,7 @@
+README.md
+setup.py
+proj_plots.egg-info/PKG-INFO
+proj_plots.egg-info/SOURCES.txt
+proj_plots.egg-info/dependency_links.txt
+proj_plots.egg-info/requires.txt
+proj_plots.egg-info/top_level.txt

@@ -10,10 +10,11 @@ This is assuming the existence of a function `obj_fun(theta)`.
 
 ```python
 # This will be cleaned up so functions are in the same file 
-from proj_xvals import proj_xvals
-from proj_data import proj_data
+from proj_plots import proj_xvals
+from proj_plots import proj_data
 
 # Set theta values and limits
+theta  = np.array([5, 0.5, 1])
 theta_lims = np.array([[3., 8.], [0., .1], [.5, 2]])
 theta_names = ["mu", "sigma", "tau"]
 

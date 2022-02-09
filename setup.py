@@ -14,6 +14,7 @@ setup(
     description=DESCRIPTION,
     long_description_content_type="text/markdown",
     long_description=LONG_DESCRIPTION,
+    license='GNU General Public License v3.0',
     url='https://github.com/kanikadchopra/proj_plots', 
     packages=find_packages('src'),
     package_dir={'': 'src'},

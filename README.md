@@ -44,7 +44,7 @@ plot_data = proj_data(obj_fun, x_vals, theta_names, True)
 
 ## FAQ
 
-**b**Does my function need to be vectorized?**b** 
+**Does my function need to be vectorized?** 
 
 No, it does not need to be vectorized in order for you to use this tool. There is a `is_vectorized` parameter that allows for both vectorized functions and non-vectorized functions. If your function is not vectorized, we will iterate through the x-values to generate the projection plots. 
 

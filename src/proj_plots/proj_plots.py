@@ -1,4 +1,6 @@
 import numpy as np 
+import pandas as pd
+import seaborn as sns
 
 def proj_xvals(theta, theta_lims, n_pts):
     """

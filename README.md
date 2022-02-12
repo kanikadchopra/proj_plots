@@ -4,13 +4,13 @@
 
 Developed by Kanika Chopra and Dr. Martin Lysy (2022)
 
-This package is created to assist with testing optimization when building optimizers by providing additional visualizations. If a plot is pinpointed to a certain area (zoomed in) or too generalized (zoomed out), there can be misinterpretations regarding optimality. For example, a graph can look as if it has (has not) reached its optimal values despite it being the opposite. Two examples of plots that are misleading despite not being at the optimal value are given below. Figure 1 shows a plot that is too zoomed in and Figure 2 shows a plot that is too zoomed out.
-
+This package is created to assist with testing optimization when building optimizers by providing additional visualizations. If a plot is pinpointed to a certain area (zoomed in) or too generalized (zoomed out), there can be misinterpretations regarding optimality. For example, a graph can look as if it has (has not) reached its optimal values despite it being the opposite. Two examples of plots that are misleading despite not being at the optimal value are given below. Figure 1 shows a plot that is too zoomed in.
 
 Figure 1: A misleading plot due to being too zoomed in
 
+<img src="/docs/zoomedin.png" alt = "Plot zoomed in">
 
-Figure 2: A misleading plot due to being too zoomed out
+Although the optimal value calculated is 1.5 this appears to be between 1.6 and 1.7.
 
 `projplots` provides an additional visual assessment of optimality. A plot is generated for each theta value being optimized. This plot varies the respective theta value while holding the other variables constant. This helps to determine if the specific theta has been optimized based on an upper and lower limit (provided by the user). 
 
@@ -36,19 +36,19 @@ denote a quadratic objective function in $$x \in \Re^d$$. If $$A_d$$ is a positi
 For example, let
 $$
 A = \begin{bmatrix} 
-    1 & 2 \\
-    4 & 3
+    1 & 1 \\
+    2 & 4
     \end{bmatrix}
 $$ 
 and 
 $$ 
 b = \begin{bmatrix}
-    5 \\
-    6
+    1 \\
+    1
     \end{bmatrix}
 $$ 
 
-Then we have that the optimal solution is $$\hat{x} = $$. Now, `projplots` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
+Then we have that the optimal solution is $$\hat{x} = (1.5, -0.5)$$. Now, `projplots` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 
 * Objective function (`obj_fun`): This can be either a vectorized or non-vectorized function. 
 *  Optimal values (`theta`): This will be the optimal solution for your function. 
@@ -56,13 +56,27 @@ Then we have that the optimal solution is $$\hat{x} = $$. Now, `projplots` allow
 *  Parameter names (`theta_names`): These are the names of your parameters, i.e. theta, mu, sigma
 *  Number of points to plot for each parameter (`n_pts`): This is the number of points that each parameter will be evaluated at for their respective plot. 
 
+### Setup
+```python
+# Optimal values
+theta = np.array([1.5, -0.5])
+
+# Upper and lower bounds
+theta_lims = np.array([[0., 3.], [-2., 1.]])
+
+# Parameter names
+theta_names = ["x1", "x2"]
+
+# Number of evaluation points per coordinate
+n_pts = 10
+```
+
 #### Vectorized Function
 ```python
 from proj import proj_xvals
 from proj import proj_data
 
-# Define function
-
+# Define vectorized function
 def obj_fun(x):
     '''
     Params: 
@@ -70,19 +84,14 @@ def obj_fun(x):
 
     Returns the output of x'Ax - 2b'x
     '''
-    return x.dot(A) @ (x) - 2 * b.dot(x)
-
-# Optimal values
-theta = np.array([])
-
-# Upper and lower bounds
-theta_lims = np.array([[3., 8.], [0., .1], [.5, 2]])
-
-# Parameter names
-theta_names = ["mu", "sigma"]
-
-# Number of evaluation points per coordinate
-n_pts = 100
+    # Transpose the x vector so it is 2xn where n is 2 * number of data points 
+    x = x.T 
+    A = np.array([[1,1], [2,4]])
+    b = np.array((1,1)).T
+    
+    y = np.diag(x.T.dot(A).dot(x)) - 2 * b.dot(x)
+        
+    return y
 
 # Generate first round of x_values
 x_vals = proj_xvals(theta, theta_lims, n_pts)
@@ -93,27 +102,27 @@ plot_data = proj_data(obj_fun, x_vals, theta_names, is_vectorized=True)
 
 Below, we have the projection plot using this data and objective function. 
 
+<img src="/docs/plot1.png" alt = "Plot from vectorized function">
+
 #### Non-Vectorized Function
 ```python
 from proj import proj_xvals
 from proj import proj_data
 
 # Define function
-
 def obj_fun(x):
-    for i in range(len(x)):
+    '''
+    Params: 
+        x: x is a 2x1 vector
 
-# Optimal values
-theta = np.array([])
+    Returns the output of x'Ax - 2b'x
+    '''
+    A = np.array([[1,1], [2,4]])
+    b = np.array((1,1)).T
+    
+    y = x.dot(A) @ x - 2 * b.dot(x) 
 
-# Upper and lower bounds
-theta_lims = np.array([[3., 8.], [0., .1], [.5, 2]])
-
-# Parameter names
-theta_names = ["mu", "sigma"]
-
-# Number of evaluation points per coordinate
-n_pts = 100
+    return y
 
 # Generate first round of x_values
 x_vals = proj_xvals(theta, theta_lims, n_pts)
@@ -121,7 +130,10 @@ x_vals = proj_xvals(theta, theta_lims, n_pts)
 # Obtain y_values and plots
 plot_data = proj_data(obj_fun, x_vals, theta_names, is_vectorized=False)
 ```
+
 Below, we have the projection plot using this data and objective function. 
+
+<img src="/docs/plot2.png" alt = "Plot from non-vectorized function">
 
 We can see that the produced plots for the vectorized and non-vectorized function are identical. Vectorized functions have the advantage of running more efficiently; however, are not necessary to utilize this tool.
 
@@ -131,5 +143,15 @@ We can see that the produced plots for the vectorized and non-vectorized functio
 
 No, it does not need to be vectorized in order for you to use this tool. There is a `is_vectorized` parameter that allows for both vectorized functions and non-vectorized functions. If your function is not vectorized, we will iterate through the x-values to generate the x-value matrix that will be used for the projection plots. If your function is vectorized, this will run more efficiently with generating the projection plots. 
 
+**What is the point of generating the x-value matrix separately?**
+
+The x-value matrix generates the combinations with the varying thetas that we will be inputting into the objective function to visualize the resulting changes in the output. By having this outputted separately, the user is able to view the values that will be inputted prior to plotting and alter it. In the future, an `equalize()` function will be added to fine-tune the scale to be more accurate. An example of what the x-value matrix looks like is given below (based on the example above): 
+
+<img src="/docs/x_vals.png" alt = "Example of x-vals matrix">
+
+**Can I see the data that is plotted as a DataFrame?**
+In the examples above, you'll notice that the output of the `proj_data()` function is set in the variable `plot_data`. If we were to call the `plot_data` variable, we would have the following DataFrame outputted (based on the example above):
+
+<img src="/docs/plot_data.png" alt = "Example of plot_data DataFrame">
 
 *This package will have a similar goal to `OptimCheck` in R.*

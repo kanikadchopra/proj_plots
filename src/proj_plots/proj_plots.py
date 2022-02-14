@@ -37,7 +37,7 @@ def proj_xvals(theta, theta_lims, n_pts):
 
         tmp_grid[:, b] = np.ones((n_pts, n_theta-1)) * theta_tmp
 
-    x_vals[i*n_pts:(i+1)*n_pts] = tmp_grid
+        x_vals[i*n_pts:(i+1)*n_pts] = tmp_grid
     
     return x_vals
 
@@ -93,6 +93,7 @@ def proj_data(fun, x_vals, theta_names, is_vectorized = False):
     plot_df.columns = ['y', 'x']
     plot_df['theta'] = np.repeat(theta_names, x_vals.shape[0]/x_vals.shape[1])
     
+    # Generate plots
     proj_plot(plot_df)
     
     return plot_df

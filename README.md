@@ -4,13 +4,18 @@
 
 Developed by Kanika Chopra and Dr. Martin Lysy (2022)
 
-This package is created to assist with testing optimization when building optimizers by providing additional visualizations. If a plot is pinpointed to a certain area (zoomed in) or too generalized (zoomed out), there can be misinterpretations regarding optimality. For example, a graph can look as if it has (has not) reached its optimal values despite it being the opposite. Two examples of plots that are misleading despite not being at the optimal value are given below. Figure 1 shows a plot that is too zoomed in.
+This package is created to assist with testing optimization when building optimizers by providing additional visualizations. If a plot is pinpointed to a certain area (zoomed in) or too generalized (zoomed out), there can be misinterpretations regarding optimality. For example, a graph can look as if it has (has not) reached its optimal values despite it being the opposite. Two examples of plots that are misleading despite not being at the optimal value are given below. Figure 1 shows a plot that is too zoomed in and Figure 2 shows a plot that is too zoomed out. In both of these plots, we are misled about the optimal value. 
 
 Figure 1: A misleading plot due to being too zoomed in
 
 <img src="/docs/zoomedin.png" alt = "Plot zoomed in">
 
-Although the optimal value calculated is 1.5 this appears to be between 1.6 and 1.7.
+
+Figure 2: A misleading plot due to being too zoomed in
+
+<img src="/docs/zoomedout.png" alt = "Plot zoomed out">
+
+Although the optimal value calculated for x2 is is 1.647 this appears to be at 1.6 for the Figure 1 and around 2 for Figure 2. 
 
 `projplots` provides an additional visual assessment of optimality. A plot is generated for each theta value being optimized. This plot varies the respective theta value while holding the other variables constant. This helps to determine if the specific theta has been optimized based on an upper and lower limit (provided by the user). 
 
@@ -36,19 +41,19 @@ denote a quadratic objective function in $$x \in \Re^d$$. If $$A_d$$ is a positi
 For example, let
 $$
 A = \begin{bmatrix} 
-    1 & 1 \\
-    2 & 4
+    3 & 2 \\
+    2 & 7
     \end{bmatrix}
 $$ 
 and 
 $$ 
 b = \begin{bmatrix}
     1 \\
-    1
+    10
     \end{bmatrix}
 $$ 
 
-Then we have that the optimal solution is $$\hat{x} = (1.5, -0.5)$$. Now, `projplots` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
+Then we have that the optimal solution is $$\hat{x} = (-0.765, 1.647)$$. Now, `projplots` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 
 * Objective function (`obj_fun`): This can be either a vectorized or non-vectorized function. 
 *  Optimal values (`theta`): This will be the optimal solution for your function. 
@@ -59,10 +64,10 @@ Then we have that the optimal solution is $$\hat{x} = (1.5, -0.5)$$. Now, `projp
 ### Setup
 ```python
 # Optimal values
-theta = np.array([1.5, -0.5])
+theta = np.array([-0.76470588,  1.64705882])
 
 # Upper and lower bounds
-theta_lims = np.array([[0., 3.], [-2., 1.]])
+theta_lims = np.array([[-3., 1], [0, 4]])
 
 # Parameter names
 theta_names = ["x1", "x2"]
@@ -71,7 +76,7 @@ theta_names = ["x1", "x2"]
 n_pts = 10
 ```
 
-#### Vectorized Function
+### Vectorized Function
 ```python
 from proj import proj_xvals
 from proj import proj_data
@@ -80,14 +85,14 @@ from proj import proj_data
 def obj_fun(x):
     '''
     Params: 
-        x: x is a 2x1 vector
+        x: x is a nx2 vector
 
     Returns the output of x'Ax - 2b'x
     '''
     # Transpose the x vector so it is 2xn where n is 2 * number of data points 
     x = x.T 
-    A = np.array([[1,1], [2,4]])
-    b = np.array((1,1)).T
+    A = np.array([[3,2], [2,7]])
+    b = np.array((1,10)).T
     
     y = np.diag(x.T.dot(A).dot(x)) - 2 * b.dot(x)
         
@@ -104,7 +109,7 @@ Below, we have the projection plot using this data and objective function.
 
 <img src="/docs/plot1.png" alt = "Plot from vectorized function">
 
-#### Non-Vectorized Function
+### Non-Vectorized Function
 ```python
 from proj import proj_xvals
 from proj import proj_data
@@ -117,8 +122,8 @@ def obj_fun(x):
 
     Returns the output of x'Ax - 2b'x
     '''
-    A = np.array([[1,1], [2,4]])
-    b = np.array((1,1)).T
+    A = np.array([[3,2], [2,7]])
+    b = np.array((1,10)).T
     
     y = x.dot(A) @ x - 2 * b.dot(x) 
 

@@ -1,0 +1,7 @@
+# macOS Files
+.DS_Store
+
+# Folders
+/dist
+/proj_plots.egg-info
+/__pycachee__

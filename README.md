@@ -1,4 +1,4 @@
-# projplots
+# projplot
 
 [Under construction]
 
@@ -17,18 +17,18 @@ Figure 2: A misleading plot due to being too zoomed in
 
 Although the optimal value calculated for x2 is is 1.647 this appears to be at 1.6 for the Figure 1 and around 2 for Figure 2. 
 
-`projplots` provides an additional visual assessment of optimality. A plot is generated for each theta value being optimized. This plot varies the respective theta value while holding the other variables constant. This helps to determine if the specific theta has been optimized based on an upper and lower limit (provided by the user). 
+`projplot` provides an additional visual assessment of optimality. A plot is generated for each theta value being optimized. This plot varies the respective theta value while holding the other variables constant. This helps to determine if the specific theta has been optimized based on an upper and lower limit (provided by the user). 
 
 For example, if we were optimizing $$\theta$$ and $$\mu$$, we would have one plot where $$\mu$$ is held constant and $$\theta$$ is varying. This plot would show how the results of the objective function vary based on $$\theta$$. By analysing this plot, we are able to determine if $$\theta$$ has reached its optimal value. An example of this plot can be found in the Examples section. 
 
 ## Contents
 
-* `src/proj_plots`: contains the project directory for the proj_plot package. 
-* `src/proj_plots/proj.py`: This file contains the functions needed to generate these varying plots. 
-    * `proj_xvals()` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
-    * `proj_plot()` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
-    * `proj_data()`: will take a objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot`.
-* `src/test`: containts a package to test `proj_plots`.
+* `src/projplots`: contains the project directory for the projplot package. 
+* `src/projplots/proj.py`: This file contains the functions needed to generate these varying plots. 
+    * `projxvals()` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
+    * `projplot()` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
+    * `projdata()`: will take a objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `projplot`.
+* `src/test`: containts a package to test `projplot`.
 
 ## Examples
 
@@ -53,7 +53,7 @@ b = \begin{bmatrix}
     \end{bmatrix}
 $$ 
 
-Then we have that the optimal solution is $$\hat{x} = (-0.765, 1.647)$$. Now, `projplots` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
+Then we have that the optimal solution is $$\hat{x} = (-0.765, 1.647)$$. Now, `projplot` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 
 * Objective function (`obj_fun`): This can be either a vectorized or non-vectorized function. 
 *  Optimal values (`theta`): This will be the optimal solution for your function. 
@@ -78,8 +78,8 @@ n_pts = 10
 
 ### Vectorized Function
 ```python
-from proj import proj_xvals
-from proj import proj_data
+from projplot import projxvals
+from projplot import projdata
 
 # Define vectorized function
 def obj_fun(x):
@@ -99,10 +99,10 @@ def obj_fun(x):
     return y
 
 # Generate first round of x_values
-x_vals = proj_xvals(theta, theta_lims, n_pts)
+x_vals = projxvals(theta, theta_lims, n_pts)
 
 # Obtain y_values and plots
-plot_data = proj_data(obj_fun, x_vals, theta_names, is_vectorized=True)
+plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=True)
 ```
 
 Below, we have the projection plot using this data and objective function. 
@@ -111,8 +111,8 @@ Below, we have the projection plot using this data and objective function.
 
 ### Non-Vectorized Function
 ```python
-from proj import proj_xvals
-from proj import proj_data
+from projplot import projxvals
+from projplot import projdata
 
 # Define function
 def obj_fun(x):
@@ -130,10 +130,10 @@ def obj_fun(x):
     return y
 
 # Generate first round of x_values
-x_vals = proj_xvals(theta, theta_lims, n_pts)
+x_vals = projxvals(theta, theta_lims, n_pts)
 
 # Obtain y_values and plots
-plot_data = proj_data(obj_fun, x_vals, theta_names, is_vectorized=False)
+plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=False)
 ```
 
 Below, we have the projection plot using this data and objective function. 
@@ -155,7 +155,7 @@ The x-value matrix generates the combinations with the varying thetas that we wi
 <img src="/docs/x_vals.png" alt = "Example of x-vals matrix">
 
 **Can I see the data that is plotted as a DataFrame?**
-In the examples above, you'll notice that the output of the `proj_data()` function is set in the variable `plot_data`. If we were to call the `plot_data` variable, we would have the following DataFrame outputted (based on the example above):
+In the examples above, you'll notice that the output of the `projdata()` function is set in the variable `plot_data`. If we were to call the `plot_data` variable, we would have the following DataFrame outputted (based on the example above):
 
 <img src="/docs/plot_data.png" alt = "Example of plot_data DataFrame">
 

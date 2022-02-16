@@ -7,7 +7,7 @@ LONG_DESCRIPTION = 'A package that will generate projection plots to visualize o
 
 # Setting up
 setup(
-    name="proj_plots",
+    name="projplot",
     version=VERSION,
     author="Kanika Chopra",
     author_email="<kdchopra@uwaterloo.ca",
@@ -15,7 +15,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=LONG_DESCRIPTION,
     license='GNU General Public License v3.0',
-    url='https://github.com/kanikadchopra/proj_plots', 
+    url='https://github.com/kanikadchopra/projplot', 
     packages=find_packages('src'),
     package_dir={'': 'src'},
     install_requires=['numpy'],

@@ -1,10 +1,8 @@
 import unittest 
 
-import proj_plots
-
-from proj_plots import proj_xvals
-from proj_plots import proj_data
-from proj_plots import proj_plot
+from projplot import projxvals
+from projplot import projdata
+from projplot import projplot
 import numpy as np
 
 class TestXVals(unittest.TestCase):

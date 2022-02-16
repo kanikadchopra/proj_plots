@@ -4,4 +4,6 @@
 # Folders
 /dist
 /proj_plots.egg-info
+/src/proj_plots.egg-info
+/src/projplot.egg-info
 /__pycachee__

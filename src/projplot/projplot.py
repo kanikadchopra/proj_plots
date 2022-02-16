@@ -2,16 +2,16 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-def proj_xvals(theta, theta_lims, n_pts):
+def projxvals(theta, theta_lims, n_pts):
     """
     Args:
         theta (NumPy array): An array of parameter values
         theta_lims (NumPy array): An array of limits or a 2 x theta.shape[0] matrix of lower and upper limits for each parameter
         n_pts (int): The number of points to plot
 
-    proj_xvals()`: Calculate a matrix of x-values (each column in an element of `theta`) such that evaluating `obj_fun()` on each row of `theta` produces the y-values in `proj_data()`.  So if `theta = [1, 15]` and `theta_lims = [[0, 2], [10, 20]]`, and `n_pts = 3`, then this would produce the matrix 
+    projxvals()`: Calculate a matrix of x-values (each column in an element of `theta`) such that evaluating `obj_fun()` on each row of `theta` produces the y-values in `projdata()`.  So if `theta = [1, 15]` and `theta_lims = [[0, 2], [10, 20]]`, and `n_pts = 3`, then this would produce the matrix 
 
-    Example: proj_xvals([1, 15], [[0, 2], [10, 20]], 3) => [[0, 15],
+    Example: projxvals([1, 15], [[0, 2], [10, 20]], 3) => [[0, 15],
                                                                            [1, 15],
                                                                            [2, 15],
                                                                            [1, 10],
@@ -41,26 +41,23 @@ def proj_xvals(theta, theta_lims, n_pts):
     
     return x_vals
 
-def proj_plot(plot_data): 
+def projplot(plot_data): 
     """
     Args:
         plot_data (DataFrame): A DataFrame that contains columns for the calculated y-value, varying x value and the respective theta name associated with the varying x
-        x_vals (NumPy array): A matrix of the x_vals, this should be outputted from proj_xvals()
-        is_vectorized (Bool): TRUE if the objective function is vectorized, else FALSE
-
-    Returns:
-        plot_df (DataFrame): The y-value in each projection plot appended to the x-values in a DataFrame format that's amenable to plotting.
+    
+    Produces a plot for each unique theta using the x and y values in plot_data
     """
     sns.relplot(
     data=plot_data, kind="line",
     x="x", y="y", col="theta",
     facet_kws=dict(sharex=False, sharey=False))
 
-def proj_data(fun, x_vals, theta_names, is_vectorized = False):
+def projdata(fun, x_vals, theta_names, is_vectorized = False):
     """
     Args:
         fun (Python function): The objective function that is being optimized
-        x_vals (NumPy array): A matrix of the x_vals, this should be outputted from proj_xvals()
+        x_vals (NumPy array): A matrix of the x_vals, this should be outputted from projxvals()
         theta_names (List): A list of the theta names respective to varying x-values for plotting
         is_vectorized (Bool): TRUE if the objective function is vectorized, else FALSE
 
@@ -94,6 +91,6 @@ def proj_data(fun, x_vals, theta_names, is_vectorized = False):
     plot_df['theta'] = np.repeat(theta_names, x_vals.shape[0]/x_vals.shape[1])
     
     # Generate plots
-    proj_plot(plot_df)
+    projplot(plot_df)
     
     return plot_df

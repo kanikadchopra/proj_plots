@@ -1,3 +1,3 @@
-from projplot import projxvals
-from projplot import projdata
-from projplot import projplot
+from .proj import projxvals
+from .proj import projdata
+from .proj import generate_plot

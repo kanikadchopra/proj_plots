@@ -2,9 +2,8 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from projplot import projxvals
-from projplot import projdata
-from projplot import projplot
+from proj import projxvals
+from proj import projdata
 
 def vectorized_2d(x):
     """

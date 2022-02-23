@@ -43,7 +43,7 @@ def projxvals(theta, theta_lims, n_pts):
     
     return x_vals
 
-def projplot(plot_data): 
+def generate_plot(plot_data): 
     """
     Args:
         plot_data (DataFrame): A DataFrame that contains columns for the calculated y-value, varying x value and the respective theta name associated with the varying x
@@ -94,6 +94,6 @@ def projdata(fun, x_vals, theta_names, is_vectorized = False):
     plot_df['theta'] = np.repeat(theta_names, n_pts)
     
     # Generate plots
-    projplot(plot_df)
+    generate_plot(plot_df)
     
     return plot_df

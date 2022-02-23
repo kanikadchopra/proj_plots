@@ -1,7 +1,7 @@
 import unittest 
 import numpy as np
 
-from projplot import projxvals
+from proj import projxvals
 
 class TestXVals(unittest.TestCase):
 

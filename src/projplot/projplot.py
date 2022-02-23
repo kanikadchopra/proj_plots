@@ -9,14 +9,16 @@ def projxvals(theta, theta_lims, n_pts):
         theta_lims (NumPy array): An array of limits or a 2 x theta.shape[0] matrix of lower and upper limits for each parameter
         n_pts (int): The number of points to plot
 
-    projxvals()`: Calculate a matrix of x-values (each column in an element of `theta`) such that evaluating `obj_fun()` on each row of `theta` produces the y-values in `projdata()`.  So if `theta = [1, 15]` and `theta_lims = [[0, 2], [10, 20]]`, and `n_pts = 3`, then this would produce the matrix 
+    Returns:
+        x_vals (NumPy array): An array of all possible combinations of the x-values based on the limits (theta_lims) and optimal values (theta)
 
-    Example: projxvals([1, 15], [[0, 2], [10, 20]], 3) => [[0, 15],
-                                                                           [1, 15],
-                                                                           [2, 15],
-                                                                           [1, 10],
-                                                                           [1, 15],
-                                                                           [1, 20]]
+    Example: 
+        projxvals([1, 15], [[0, 2], [10, 20]], 3) => [[0, 15],
+                                                     [1, 15],
+                                                     [2, 15],
+                                                     [1, 10],
+                                                     [1, 15],
+                                                     [1, 20]]
     """
     
     x_theta = np.linspace(theta_lims[:,0], theta_lims[:,1], n_pts).T

@@ -69,10 +69,8 @@ def projdata(fun, x_vals, theta_names, is_vectorized = False):
     
     """
     n_x = x_vals.shape[0]
-    
-    # Temporary solution: Create a DataFrame first
-    plot_df = pd.DataFrame(x_vals)
-
+    n_param = x_vals.shape[1]
+    n_pts = int(n_x/n_param)
     
     # Initialize empty y vector
     y_vals = np.zeros(n_x)
@@ -84,13 +82,16 @@ def projdata(fun, x_vals, theta_names, is_vectorized = False):
     
     # Function is vectorized
     else: 
-        y_vals = fun(x_vals, axis=1)
+        y_vals = fun(x_vals)
 
+    # Get the x-values that vary for each parameter 
+    varying_x = np.concatenate([x_vals[i*n_pts:(i+1)*n_pts, i] for i in range(n_param)])
+    
     # Append the y_values to the dataframe
-    plot_df = pd.DataFrame(np.unique(pd.DataFrame(x_vals)), y_vals)
+    plot_df = pd.DataFrame(varying_x, y_vals)
     plot_df.reset_index(inplace=True)
     plot_df.columns = ['y', 'x']
-    plot_df['theta'] = np.repeat(theta_names, x_vals.shape[0]/x_vals.shape[1])
+    plot_df['theta'] = np.repeat(theta_names, n_pts)
     
     # Generate plots
     projplot(plot_df)

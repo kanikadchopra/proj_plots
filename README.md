@@ -76,7 +76,8 @@ def obj_fun(x):
     Params: 
         x: x is a nx2 vector
 
-    Returns the output of x'Ax - 2b'x
+    Returns:
+        The output of x'Ax - 2b'x
     '''
     # Transpose the x vector so it is 2xn where n is 2 * number of data points 
     x = x.T 
@@ -109,7 +110,8 @@ def obj_fun(x):
     Params: 
         x: x is a 2x1 vector
 
-    Returns the output of x'Ax - 2b'x
+    Returns:
+        The output of x'Ax - 2b'x
     '''
     A = np.array([[3,2], [2,7]])
     b = np.array((1,10)).T

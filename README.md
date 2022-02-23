@@ -19,7 +19,7 @@ Although the optimal value calculated for x2 is is 1.647 this appears to be at 1
 
 `projplot` provides an additional visual assessment of optimality. A plot is generated for each theta value being optimized. This plot varies the respective theta value while holding the other variables constant. This helps to determine if the specific theta has been optimized based on an upper and lower limit (provided by the user). 
 
-For example, if we were optimizing $$\theta$$ and $$\mu$$, we would have one plot where $$\mu$$ is held constant and $$\theta$$ is varying. This plot would show how the results of the objective function vary based on $$\theta$$. By analysing this plot, we are able to determine if $$\theta$$ has reached its optimal value. An example of this plot can be found in the Examples section. 
+For example, if we were optimizing `\theta` and `mu`, we would have one plot where `mu` is held constant and `theta` is varying. This plot would show how the results of the objective function vary based on `theta`. By analysing this plot, we are able to determine if `theta` has reached its optimal value. An example of this plot can be found in the Examples section. 
 
 ## Contents
 
@@ -32,28 +32,17 @@ For example, if we were optimizing $$\theta$$ and $$\mu$$, we would have one plo
 
 ## Examples
 
-An overview of the package functionality is illustrated with the following example. Let 
+An overview of the package functionality is illustrated with the following example. Let `Q(x) = x^TAx - 2b^Tx` denote a quadratic objective function in `x` is in the d-dimensional real space. If `A` is a positive-definite matrix, then the unique minimum of `Q(x)` is `x̂ =A^{-1}b` (A inverse * b). 
 
-$$ Q(x) = x^TAx - 2b^Tx $$ 
+For example, let 
+A = [[3,2],
+     [2,7]]
 
-denote a quadratic objective function in $$x \in \Re^d$$. If $$A_d$$ is a positive-definite matrix, then the unique minimum of $$Q(x)$$ is $$x̂ =A^{-1}b$$. 
-
-For example, let
-$$
-A = \begin{bmatrix} 
-    3 & 2 \\
-    2 & 7
-    \end{bmatrix}
-$$ 
 and 
-$$ 
-b = \begin{bmatrix}
-    1 \\
-    10
-    \end{bmatrix}
-$$ 
+b = [1,
+     10]
 
-Then we have that the optimal solution is $$\hat{x} = (-0.765, 1.647)$$. Now, `projplot` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
+Then we have that the optimal solution is `x̂ = (-0.765, 1.647)`. Now, `projplot` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 
 * Objective function (`obj_fun`): This can be either a vectorized or non-vectorized function. 
 *  Optimal values (`theta`): This will be the optimal solution for your function. 

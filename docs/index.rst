@@ -1,8 +1,7 @@
-projplot documentation! 
-========================================
+Welcome to projplot's documentation!
+====================================
 
 This package is created to assist with testing optimization when building optimizers by providing additional visualizations. 
-
 
 .. toctree::
    :maxdepth: 2

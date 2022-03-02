@@ -71,7 +71,7 @@ Vectorized Function
 
 Below, we have the projection plot using this data and objective function. 
 
-.. image:: docs/images/plot1.png
+.. image:: images/plot1.png
     :alt: Plot from vectorized function
 
 Non-Vectorized Function
@@ -106,7 +106,7 @@ Non-Vectorized Function
 
 Below, we have the projection plot using this data and objective function. 
 
-.. image:: docs/images/plot2.png
+.. image:: images/plot2.png
     :alt: Plot from non-vectorized function
 
 We can see that the produced plots for the vectorized and non-vectorized function are identical. Vectorized functions have the advantage of running more efficiently; however, are not necessary to utilize this tool.

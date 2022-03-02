@@ -4,12 +4,12 @@ Examples
 An overview of the package functionality is illustrated with the following example. Let ``Q(x) = x^TAx - 2b^Tx`` denote a quadratic objective function in ``x`` is in the d-dimensional real space. If ``A`` is a positive-definite matrix, then the unique minimum of ``Q(x)`` is ``x̂ =A^{-1}b`` (A inverse * b). 
 
 For example, let 
-A = [[3,2],
-     [2,7]]
+    A = [[3,2],
+        [2,7]]
 
 and 
-b = [1,
-    10]
+    b = [1,
+        10]
 
 Then we have that the optimal solution is ``x̂ = (-0.765, 1.647)``. Now, ``projplot`` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 

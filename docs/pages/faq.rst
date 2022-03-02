@@ -23,5 +23,5 @@ In the examples above, you'll notice that the output of the ``projdata()`` funct
 .. image:: docs/images/plot_data.png
     :alt: Example of plot_data DataFrame
 
-*This package will have a similar goal to ``OptimCheck`` in R.*
+*This package will have a similar goal to OptimCheck in R.*
 

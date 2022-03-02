@@ -6,11 +6,12 @@ This package is created to assist with testing optimization when building optimi
 
 Figure 1: A misleading plot due to being too zoomed in
 
-.. image:: docs/images/zoomedin.png
+.. image:: images/zoomedin.png
     :alt: Plot zoomed in
 
 Figure 2: A misleading plot due to being too zoomed in
-.. image:: docs/images/zoomedout.png
+
+.. image:: images/zoomedout.png
     :alt: Plot zoomed out
 
 Although the optimal value calculated for x2 is is 1.647 this appears to be at 1.6 for the Figure 1 and around 2 for Figure 2. 

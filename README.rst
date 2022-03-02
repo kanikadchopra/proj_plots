@@ -9,7 +9,7 @@ This package is created to assist with testing optimization when building optimi
 Documentation
 =============
 
-Read the documentation online at 
+Read the documentation online at https://projplot.readthedocs.io/
 
 
 Source Code

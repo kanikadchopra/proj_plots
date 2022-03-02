@@ -7,3 +7,6 @@
 /src/proj_plots.egg-info
 /src/projplot.egg-info
 /__pycachee__
+
+# Sphinx documentation
+docs/_build/

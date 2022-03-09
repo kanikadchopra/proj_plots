@@ -40,7 +40,7 @@ You can find the package listed here: https://pypi.org/project/projplot/0.0.1/
 Usage
 ==============================
 An overview of the package functionality is illustrated with the following example. 
-Let :math:`Q(x) = x^{T}Ax - 2b^{T}x` denote a quadratic objective function and :math:`x \elem \Re^{d}`. If A is a positive-definite matrix, then the unique minimum of :math:`Q(x)` is :math:`\hat{x} =A^{-1}b`.
+Let :math:`Q(x) = x^{T}Ax - 2b^{T}x` denote a quadratic objective function and :math:`x \in \Re^{d}`. If A is a positive-definite matrix, then the unique minimum of :math:`Q(x)` is :math:`\hat{x} =A^{-1}b`.
 
 For example, let 
 

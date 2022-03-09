@@ -120,6 +120,8 @@ Below, we have the projection plot using this data and objective function.
 .. image:: pages/images/plot1.png
     :alt: Plot from vectorized function
 
+.. automodule:: src.projplot.proj
+    ::members:
 
 .. toctree::
    :maxdepth: 2

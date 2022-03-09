@@ -13,12 +13,12 @@ This package is created to assist with testing optimization when building optimi
 
 Figure 1: A misleading plot due to being too zoomed in
 
-.. image:: images/zoomedin.png
+.. image:: pages/images/zoomedin.png
     :alt: Plot zoomed in
 
 Figure 2: A misleading plot due to being too zoomed in
 
-.. image:: images/zoomedout.png
+.. image:: pages/images/zoomedout.png
     :alt: Plot zoomed out
 
 Although the optimal value calculated for x2 is is 1.647 this appears to be at 1.6 for the Figure 1 and around 2 for Figure 2. 
@@ -116,7 +116,7 @@ Vectorized Function
 
 Below, we have the projection plot using this data and objective function. 
 
-.. image:: images/plot1.png
+.. image:: pages/images/plot1.png
     :alt: Plot from vectorized function
 
 

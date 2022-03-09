@@ -31,8 +31,7 @@ For example, if we were optimizing :math:`\theta` and :math:`\mu`, we would have
 Installation
 ==============================
 
-.. code-block:: bash
-   pip install projplot==0.0.1
+``pip install projplot==0.0.1``
 
 You can find the package listed here: https://pypi.org/project/projplot/0.0.1/
 
@@ -49,9 +48,7 @@ For example, let
        3 & 2 \\
        2 & 7
        \end{bmatrix}
-and
-
-.. math::
+       \\
    b = \begin{bmatrix}
        1 \\
        10
@@ -86,7 +83,7 @@ Setup
 Vectorized Function
 ====================
 
-.. code-block:: python
+.. code:: python
 
     from projplot import projxvals
     from projplot import projdata
@@ -120,7 +117,6 @@ Below, we have the projection plot using this data and objective function.
 .. image:: pages/images/plot1.png
     :alt: Plot from vectorized function
 
-
 .. toctree::
    :maxdepth: 2
    :caption: Overview
@@ -128,6 +124,7 @@ Below, we have the projection plot using this data and objective function.
    pages/contents
    pages/examples
    pages/faq
+   source/modules
 
 Links
 =====

@@ -19,6 +19,18 @@ Although the optimal value calculated for x2 is is 1.647 this appears to be at 1
 
 For example, if we were optimizing `theta` and `mu`, we would have one plot where `mu` is held constant and `theta` is varying. This plot would show how the results of the objective function vary based on `theta`. By analysing this plot, we are able to determine if `theta` has reached its optimal value. An example of this plot can be found in the Examples section. 
 
+## Documentation
+
+Read the documentation online at http://projplot.readthedocs.io/
+
+Alternatively, build the documentation from the ``docs/`` folder
+
+```bash
+pip install sphinx
+cd docs/
+make html
+```
+
 ## Contents
 
 * `src/projplot`: contains the project directory for the projplot package. 

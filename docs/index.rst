@@ -48,8 +48,7 @@ For example, let
        3 & 2 \\
        2 & 7
        \end{bmatrix}
-and
-.. math::
+       \\
    b = \begin{bmatrix}
        1 \\
        10
@@ -118,9 +117,6 @@ Below, we have the projection plot using this data and objective function.
 .. image:: pages/images/plot1.png
     :alt: Plot from vectorized function
 
-.. automodule:: src.projplot.proj
-    ::members:
-
 .. toctree::
    :maxdepth: 2
    :caption: Overview
@@ -128,6 +124,7 @@ Below, we have the projection plot using this data and objective function.
    pages/contents
    pages/examples
    pages/faq
+   source/modules
 
 Links
 =====

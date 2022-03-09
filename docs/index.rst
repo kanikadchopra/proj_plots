@@ -31,7 +31,7 @@ For example, if we were optimizing :math:`\theta` and :math:`\mu`, we would have
 Installation
 ==============================
 
-.. code-block:: bash
+.. code-block:: console
    pip install projplot==0.0.1
 
 You can find the package listed here: https://pypi.org/project/projplot/0.0.1/

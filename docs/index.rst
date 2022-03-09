@@ -31,8 +31,7 @@ For example, if we were optimizing :math:`\theta` and :math:`\mu`, we would have
 Installation
 ==============================
 
-.. code::
-   pip install projplot==0.0.1
+``pip install projplot==0.0.1``
 
 You can find the package listed here: https://pypi.org/project/projplot/0.0.1/
 
@@ -50,7 +49,6 @@ For example, let
        2 & 7
        \end{bmatrix}
 and
-
 .. math::
    b = \begin{bmatrix}
        1 \\
@@ -86,7 +84,7 @@ Setup
 Vectorized Function
 ====================
 
-.. code-block:: python
+.. code:: python
 
     from projplot import projxvals
     from projplot import projdata

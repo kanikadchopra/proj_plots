@@ -6,12 +6,12 @@ This package is created to assist with testing optimization when building optimi
 
 Figure 1: A misleading plot due to being too zoomed in
 
-<img src="pages/images/zoomedin.png" alt = "Plot zoomed in">
+<img src="docs/pages/images/zoomedin.png" alt = "Plot zoomed in">
 
 
 Figure 2: A misleading plot due to being too zoomed in
 
-<img src="pages/images/zoomedout.png" alt = "Plot zoomed out">
+<img src="docs/pages/images/zoomedout.png" alt = "Plot zoomed out">
 
 Although the optimal value calculated for x2 is is 1.647 this appears to be at 1.6 for the Figure 1 and around 2 for Figure 2. 
 
@@ -95,7 +95,7 @@ plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=True)
 
 Below, we have the projection plot using this data and objective function. 
 
-<img src="pages/images/plot1.png" alt = "Plot from vectorized function">
+<img src="docs/pages/images/plot1.png" alt = "Plot from vectorized function">
 
 ### Non-Vectorized Function
 ```python
@@ -127,7 +127,7 @@ plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=False)
 
 Below, we have the projection plot using this data and objective function. 
 
-<img src="pages/images/plot2.png" alt = "Plot from non-vectorized function">
+<img src="docs/pages/images/plot2.png" alt = "Plot from non-vectorized function">
 
 We can see that the produced plots for the vectorized and non-vectorized function are identical. Vectorized functions have the advantage of running more efficiently; however, are not necessary to utilize this tool.
 
@@ -141,11 +141,11 @@ No, it does not need to be vectorized in order for you to use this tool. There i
 
 The x-value matrix generates the combinations with the varying thetas that we will be inputting into the objective function to visualize the resulting changes in the output. By having this outputted separately, the user is able to view the values that will be inputted prior to plotting and alter it. In the future, an `equalize()` function will be added to fine-tune the scale to be more accurate. An example of what the x-value matrix looks like is given below (based on the example above): 
 
-<img src="pages/images/x_vals.png" alt = "Example of x-vals matrix">
+<img src="docs/pages/images/x_vals.png" alt = "Example of x-vals matrix">
 
 **Can I see the data that is plotted as a DataFrame?**
 In the examples above, you'll notice that the output of the `projdata()` function is set in the variable `plot_data`. If we were to call the `plot_data` variable, we would have the following DataFrame outputted (based on the example above):
 
-<img src="pages/images/plot_data.png" alt = "Example of plot_data DataFrame">
+<img src="docs/pages/images/plot_data.png" alt = "Example of plot_data DataFrame">
 
 *This package will have a similar goal to `OptimCheck` in R.*

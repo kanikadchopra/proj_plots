@@ -40,7 +40,7 @@ Setup
 Vectorized Function
 ====================
 
-.. code-block:: python
+.. code:: python
 
     from projplot import projxvals
     from projplot import projdata
@@ -77,7 +77,7 @@ Below, we have the projection plot using this data and objective function.
 Non-Vectorized Function
 ========================
 
-.. code-block:: python
+.. code:: python
     from projplot import projxvals
     from projplot import projdata
 

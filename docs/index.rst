@@ -27,6 +27,16 @@ Although the optimal value calculated for :math:`x_{2}` is is 1.647 this appears
 
 For example, if we were optimizing :math:`\theta` and :math:`\mu`, we would have one plot where :math:`\mu` is held constant and :math:`\theta` is varying. This plot would show how the results of the objective function vary based on :math:`\theta`. By analysing this plot, we are able to determine if :math:`\theta` has reached its optimal value. An example of this plot can be found below in the Usage section.
 
+This package is composed of the following functions: 
+- ``src/projplot``: contains the project directory for the projplot package. 
+- ``src/projplot/proj.py``: This file contains the functions needed to generate these varying plots. 
+    * ``projxvals()`` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
+    * ``generate_plot()`` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
+    * ``projdata()``: will take a objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using ``generate_plot``.
+- ``src/test``: containts a package to test ``projplot``.
+
+More details can be found in the Function Documentation section below. 
+
 ==============================
 Installation
 ==============================
@@ -117,17 +127,31 @@ Below, we have the projection plot using this data and objective function.
 .. image:: pages/images/plot1.png
     :alt: Plot from vectorized function
 
+==============================
+More Information
+==============================
+
 .. toctree::
    :maxdepth: 2
    :caption: Overview
 
-   pages/contents
    pages/examples
    pages/faq
-   source/modules
 
+
+==============================
+Function Documentation
+==============================
+
+.. toctree::
+   :maxdepth: 1
+
+   source/projplot
+
+==============================
 Links
-=====
+==============================
+
 * :ref:`search`
 * Source code: https://github.com/kanikadchopra/projplot
 * Contact: kdchopra@uwaterloo.ca

@@ -1,7 +1,7 @@
 projplot package
 ================
 
-projplot.proj module
+projplot.proj
 --------------------
 
 .. automodule:: projplot.proj

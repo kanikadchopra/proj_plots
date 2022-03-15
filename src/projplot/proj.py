@@ -14,11 +14,11 @@ def projxvals(theta, theta_lims, n_pts):
 
     Example: 
         projxvals([1, 15], [[0, 2], [10, 20]], 3) => [[0, 15],
-                                                     [1, 15],
-                                                     [2, 15],
-                                                     [1, 10],
-                                                     [1, 15],
-                                                     [1, 20]]
+                                                      [1, 15],
+                                                      [2, 15],
+                                                      [1, 10],
+                                                      [1, 15],
+                                                      [1, 20]]
     """
     
     x_theta = np.linspace(theta_lims[:,0], theta_lims[:,1], n_pts).T

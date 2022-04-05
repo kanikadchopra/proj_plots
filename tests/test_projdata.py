@@ -2,8 +2,8 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from proj import projxvals
-from proj import projdata
+from proj_plot import proj_xvals
+from proj_plot import proj_data
 
 def vectorized_2d(x):
     """
@@ -49,7 +49,7 @@ def quadratic_1d(x):
     y = x**2 + 10*x
     return y 
 
-class TestProjData(unittest.TestCase):
+class Testproj_data(unittest.TestCase):
     def test_2dvec_quadratic(self):
         # Optimal value from the quadratic formula
         theta = np.array([-0.76470588,  1.64705882])
@@ -63,8 +63,8 @@ class TestProjData(unittest.TestCase):
         # Number of evaluation points per coordinate
         n_pts = 10
 
-        x_vals = projxvals(theta, theta_lims, n_pts)
-        plot_data = projdata(vectorized_2d, x_vals, theta_names, is_vectorized=True)
+        x_vals = proj_xvals(theta, theta_lims, n_pts)
+        plot_data = proj_data(vectorized_2d, x_vals, theta_names, is_vectorized=True)
 
         # Setup the correct dataframe
         correct_x = np.array([-3.        , -2.55555556, -2.11111111, -1.66666667, -1.22222222,
@@ -96,8 +96,8 @@ class TestProjData(unittest.TestCase):
         # Number of evaluation points per coordinate
         n_pts = 10
 
-        x_vals = projxvals(theta, theta_lims, n_pts)
-        plot_data = projdata(nonvectorized_2d, x_vals, theta_names, is_vectorized=False)
+        x_vals = proj_xvals(theta, theta_lims, n_pts)
+        plot_data = proj_data(nonvectorized_2d, x_vals, theta_names, is_vectorized=False)
 
         # Setup the correct dataframe
         correct_x = np.array([-3.        , -2.55555556, -2.11111111, -1.66666667, -1.22222222,
@@ -129,8 +129,8 @@ class TestProjData(unittest.TestCase):
         # Number of evaluation points per coordinate
         n_pts = 10
 
-        x_vals = projxvals(theta, theta_lims, n_pts)
-        plot_data = projdata(quadratic_1d, x_vals, theta_names, is_vectorized=False)
+        x_vals = proj_xvals(theta, theta_lims, n_pts)
+        plot_data = proj_data(quadratic_1d, x_vals, theta_names, is_vectorized=False)
 
         # Setup the correct dataframe
         correct_x = np.array([-10.        ,  -8.88888889,  -7.77777778,  -6.66666667,

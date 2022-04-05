@@ -1,7 +1,7 @@
 import unittest 
 import numpy as np
 
-from proj import projxvals
+from proj_plot import proj_xvals
 
 class TestXVals(unittest.TestCase):
 
@@ -18,7 +18,7 @@ class TestXVals(unittest.TestCase):
         n_theta = theta_lims.shape[0]
         n_pts = 3
 
-        result = projxvals(theta, theta_lims, n_pts)
+        result = proj_xvals(theta, theta_lims, n_pts)
         correct = np.array([[0.], [1.], [2.]])
 
         np.testing.assert_array_equal(np.around(result, 8), np.around(correct, 8))
@@ -36,7 +36,7 @@ class TestXVals(unittest.TestCase):
         n_theta = theta_lims.shape[0]
         n_pts = 3 
 
-        result = projxvals(theta, theta_lims, n_pts)
+        result = proj_xvals(theta, theta_lims, n_pts)
         correct = np.array([[ 0., 15.], [ 1., 15.], [ 2., 15.],
                             [ 1., 10.], [ 1., 15.], [ 1., 20.]])
 
@@ -55,7 +55,7 @@ class TestXVals(unittest.TestCase):
         n_theta = theta_lims.shape[0]
         n_pts = 3 
 
-        result = projxvals(theta, theta_lims, n_pts)
+        result = proj_xvals(theta, theta_lims, n_pts)
         correct = np.array([[ 0.,  5., 10.],
                             [ 1.,  5., 10.],
                             [ 2.,  5., 10.],
@@ -80,7 +80,7 @@ class TestXVals(unittest.TestCase):
         n_theta = theta_lims.shape[0]
         n_pts = 4 
         
-        result = projxvals(theta, theta_lims, n_pts)
+        result = proj_xvals(theta, theta_lims, n_pts)
         correct = np.array([[-2.        , 15.        ],
                             [-0.66666667, 15.        ],
                             [ 0.66666667, 15.        ],
@@ -105,7 +105,7 @@ class TestXVals(unittest.TestCase):
         n_theta = theta_lims.shape[0]
         n_pts = 4 
 
-        result = projxvals(theta, theta_lims, n_pts)
+        result = proj_xvals(theta, theta_lims, n_pts)
         correct = np.array([[ 0.        , 15.        ],
                             [ 1.66666667, 15.        ],
                             [ 3.33333333, 15.        ],
@@ -130,7 +130,7 @@ class TestXVals(unittest.TestCase):
         n_theta = theta_lims.shape[0]
         n_pts = 10
 
-        result = projxvals(theta, theta_lims, n_pts)
+        result = proj_xvals(theta, theta_lims, n_pts)
         correct = np.array([[ 0.        , 15.        ],
                             [ 0.22222222, 15.        ],
                             [ 0.44444444, 15.        ],
@@ -167,7 +167,7 @@ class TestXVals(unittest.TestCase):
         n_theta = theta_lims.shape[0]
         n_pts = 50
 
-        result = projxvals(theta, theta_lims, n_pts)
+        result = proj_xvals(theta, theta_lims, n_pts)
         correct = np.array([[ 0.        , 15.        ],
                             [ 0.04081633, 15.        ],
                             [ 0.08163265, 15.        ],

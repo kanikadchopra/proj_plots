@@ -13,16 +13,17 @@ def proj_xvals(x_opt, x_lims, n_pts):
         x_vals (NumPy array): An array of all possible combinations of the x-values based on the limits (x_lims) and optimal values (x_opt)
 
     Example: 
-        proj_xvals([1, 15], [[0, 2], [10, 20]], 3) => [[0, 15],
-                                                      [1, 15],
-                                                      [2, 15],
-                                                      [1, 10],
-                                                      [1, 15],
-                                                      [1, 20]]
+        proj_xvals(np.array([1,15]), np.array([[0,2], [10, 20]]), 3)
+        => [[0, 15],
+            [1, 15],
+            [2, 15],
+            [1, 10],
+            [1, 15],
+            [1, 20]]
     """
     
     x_space = np.linspace(x_lims[:,0], x_lims[:,1], n_pts).T
-    n_x = theta_lims.shape[0]
+    n_x = x_lims.shape[0]
     x_vals = np.concatenate([x_opt[None].astype(float)] * n_x * n_pts)
 
     for i in range(n_x):
@@ -107,7 +108,7 @@ def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plo
         n_pts (int): The number of points to plot
         vectorized (Bool): TRUE if the objective function is vectorized, else FALSE
         plot (Bool): TRUE if the user wants a plot outputted, else FALSE
-        x_vline (optional Bool): If this parameter is set to True, then a vertical line is plotted at each theta. The default is set to False.
+        x_vline (optional Bool): If this parameter is set to True, then a vertical line is plotted at each parameter. The default is set to False.
 
 
     Returns:

@@ -23,17 +23,19 @@ Figure 2: A misleading plot due to being too zoomed in
 
 Although the optimal value calculated for :math:`x_{2}` is is 1.647 this appears to be at 1.6 for the Figure 1 and around 2 for Figure 2. 
 
-``projplot`` provides an additional visual assessment of optimality. A plot is generated for each theta value being optimized. This plot varies the respective theta value while holding the other variables constant. This helps to determine if the specific theta has been optimized based on an upper and lower limit (provided by the user). 
+``projplot`` provides an additional visual assessment of optimality. A plot is generated for each parameter being optimized. This plot varies the respective x values while holding the other variables constant. This helps to determine if the specific parameter has been optimized based on an upper and lower limit (provided by the user). 
 
 For example, if we were optimizing :math:`\theta` and :math:`\mu`, we would have one plot where :math:`\mu` is held constant and :math:`\theta` is varying. This plot would show how the results of the objective function vary based on :math:`\theta`. By analysing this plot, we are able to determine if :math:`\theta` has reached its optimal value. An example of this plot can be found below in the Usage section.
 
 This package is composed of the following functions: 
 - ``src/projplot``: contains the project directory for the projplot package. 
 - ``src/projplot/proj.py``: This file contains the functions needed to generate these varying plots. 
-    * ``projxvals()`` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
-    * ``generate_plot()`` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
-    * ``projdata()``: will take a objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using ``generate_plot``.
-- ``src/test``: containts a package to test ``projplot``.
+    * ``proj_xvals()`` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
+    * ``proj_plot_show()`` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
+    * ``proj_data()`` will take an objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot_show`.
+    * ``proj_plot()`` will take an objective function, the optimal values, limits, an optional list of names, the number of points, whether the function is vectorized and whether plotting is required with a vertical line and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot_show()` if `plot=True`.
+
+- ``tests``: containts a package to test ``projplot``.
 
 More details can be found in the Function Documentation section below. 
 
@@ -67,9 +69,9 @@ For example, let
 Then we have that the optimal solution is :math:`\hat{x} = (-0.765, 1.647)`. Now, ``projplot`` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 
 - Objective function (``obj_fun``): This can be either a vectorized or non-vectorized function. 
--  Optimal values (``theta``): This will be the optimal solution for your function. 
--  Upper and lower bounds for each theta (``theta_lims``): This will provide an initial range of values to observe.
--  Parameter names (``theta_names``): These are the names of your parameters, i.e. theta, mu, sigma
+-  Optimal values (``x_opt``): This will be the optimal solution for your function. 
+-  Upper and lower bounds for each parameter (``x_lims``): This will provide an initial range of values to observe.
+-  Parameter names (``x_names``): These are the names of your parameters, i.e. theta, mu, sigma
 -  Number of points to plot for each parameter (``n_pts``): This is the number of points that each parameter will be evaluated at for their respective plot. 
 
 Setup
@@ -95,8 +97,9 @@ Vectorized Function
 
 .. code:: python
 
-    from projplot import projxvals
-    from projplot import projdata
+    from proj_plot import proj_xvals
+    from proj_plot import proj_data
+    from proj_plot import proj_plot_show
 
     # Define vectorized function
     def obj_fun(x):
@@ -117,10 +120,11 @@ Vectorized Function
         return y
 
     # Generate first round of x_values
-    x_vals = projxvals(theta, theta_lims, n_pts)
+    x_vals = proj_xvals(theta, theta_lims, n_pts)
 
     # Obtain y_values and plots
-    plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=True)
+    plot_data = proj_data(obj_fun, x_vals, theta_names, vectorized=True)
+    proj_plot_show(plot_data)
 
 Below, we have the projection plot using this data and objective function. 
 

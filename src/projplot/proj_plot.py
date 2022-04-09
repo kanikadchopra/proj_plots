@@ -30,29 +30,40 @@ def proj_xvals(x_opt, x_lims, n_pts):
 
     return x_vals
 
-def proj_plot_show(plot_data): 
+def proj_plot_show(plot_data, x_vline=False):
     """
     Args:
         plot_data (DataFrame): A DataFrame that contains columns for the calculated y-value, varying x value and the respective x_opt name associated with the varying x
+        x_vline (optional Bool): If this parameter is set to True, then a vertical line is plotted at each optimal x. The default is False.
     
     Produces a plot for each unique x_opt using the x and y values in plot_data
     """
-    if x is not None: 
-        sns.relplot(
+    
+    n_pts = plot_data.shape[0]
+        
+    grid = sns.relplot(
         data=plot_data, kind="line",
         x="x", y="y", col="x_opt",
         facet_kws=dict(sharex=False, sharey=False))
-    else:
-        # Plot a vertical line on each plot at x_opt
+    
+    if x_vline == True:
+        total_pnts, n_pts= plot_data.shape
+        n_param = np.unique(plot_data.x_opt).shape[0]
+        x_temp = np.array([plot_data.loc[(n_pts*i)+1, 'x'] for i in range(n_param)])
+    
 
-def proj_data(fun, x_vals, x_names=[], vectorized = False, x_opt=True):
+        for i in range(len(grid.axes.flat)):
+            ax = grid.axes.flat[i]
+            ax.axvline(x=x_temp[i], color='red')
+
+def proj_data(fun, x_vals, x_names=[], vectorized = False):
     """
     Args:
         fun (Python function): The objective function that is being optimized
         x_vals (NumPy array): A matrix of the x_vals, this should be outputted from proj_xvals()
         x_names (optional List): A list of the names respective to varying x-values for plotting
         vectorized (Bool): TRUE if the objective function is vectorized, else FALSE
-        x_opt (optional any of Bool or None): If this parameter is set to None, then a vertical line is plotted at each theta
+
     Returns:
         plot_df (DataFrame): The y-value in each projection plot appended to the x-values in a DataFrame format that's amenable to plotting
     
@@ -67,11 +78,6 @@ def proj_data(fun, x_vals, x_names=[], vectorized = False, x_opt=True):
     
     # Initialize empty y vector
     y_vals = np.zeros(n_x)
-    
-    if x_opt is None: 
-        x_temp = np.array([x_vals[(n_pts*i)+1, :] for i in range(n_param)])
-        x_vals = np.repeat(x_temp, n_pts, axis=0)
-        
     varying_x = np.concatenate([x_vals[i*n_pts:(i+1)*n_pts, i] for i in range(n_param)])
     
     # Function is not vectorized 
@@ -91,17 +97,18 @@ def proj_data(fun, x_vals, x_names=[], vectorized = False, x_opt=True):
     
     return plot_df
 
-
-def proj_plot(fun, x_opt, x_lims, x_names, n_pts=100, vectorized=False, plot=True):
+def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plot=True, x_vline=False):
     """
     Args:
         fun (Python function): The objective function that is being optimized
         x_opt (NumPy array): An array of parameter values
         x_lims (NumPy array): An array of limits or a 2 x x_opt.shape[0] matrix of lower and upper limits for each parameter
-        x_names (List): A list of the names respective to varying x-values for plotting
+        x_names (anyof List None): A list of the names respective to varying x-values for plotting
         n_pts (int): The number of points to plot
         vectorized (Bool): TRUE if the objective function is vectorized, else FALSE
         plot (Bool): TRUE if the user wants a plot outputted, else FALSE
+        x_vline (optional Bool): If this parameter is set to True, then a vertical line is plotted at each theta. The default is set to False.
+
 
     Returns:
         plot_df (DataFrame): The y-value in each projection plot appended to the x-values in a DataFrame format that's amenable to plotting
@@ -115,6 +122,10 @@ def proj_plot(fun, x_opt, x_lims, x_names, n_pts=100, vectorized=False, plot=Tru
     n_param = x_vals.shape[1]
     n_pts = int(n_x/n_param)
     
+    # If x_names is NONE, default list to ["x1", "x2", ..]
+    if x_names is None:
+        x_names = ['x' + str(i) for i in range(n_param)]
+        
     # Initialize empty y vector
     y_vals = np.zeros(n_x)
 
@@ -137,7 +148,6 @@ def proj_plot(fun, x_opt, x_lims, x_names, n_pts=100, vectorized=False, plot=Tru
     plot_df['x_opt'] = np.repeat(x_names, n_pts)
 
     if plot==True:
-        proj_plot_show(plot_df)
+        proj_plot_show(plot_df, x_vline=x_vline)
     
     return plot_df
-  

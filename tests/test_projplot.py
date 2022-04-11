@@ -2,8 +2,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from src.projplot.proj_plot import proj_xvals
-from src.projplot.proj_plot import proj_data
+from src.projplot.proj_plot import proj_plot
 
 def vectorized_2d(x):
     """
@@ -63,8 +62,7 @@ class Testproj_data(unittest.TestCase):
         # Number of evaluation points per coordinate
         n_pts = 10
 
-        x_vals = proj_xvals(theta, theta_lims, n_pts)
-        plot_data = proj_data(vectorized_2d, x_vals, theta_names, vectorized=True)
+        plot_data = proj_plot(vectorized_2d, theta, theta_lims, theta_names, n_pts, vectorized=True)
 
         # Setup the correct dataframe
         correct_x = np.array([-3.        , -2.55555556, -2.11111111, -1.66666667, -1.22222222,
@@ -96,8 +94,7 @@ class Testproj_data(unittest.TestCase):
         # Number of evaluation points per coordinate
         n_pts = 10
 
-        x_vals = proj_xvals(theta, theta_lims, n_pts)
-        plot_data = proj_data(nonvectorized_2d, x_vals, theta_names, vectorized=False)
+        plot_data = proj_plot(nonvectorized_2d, theta, theta_lims, theta_names, n_pts, vectorized=False)
 
         # Setup the correct dataframe
         correct_x = np.array([-3.        , -2.55555556, -2.11111111, -1.66666667, -1.22222222,
@@ -117,7 +114,7 @@ class Testproj_data(unittest.TestCase):
         pd.testing.assert_frame_equal(plot_data, correct_df)
 
     def test_1d_quadratic(self):
-                # Optimal value from the quadratic formula
+        # Optimal value from the quadratic formula
         theta = np.array([-5])
 
         # Upper and lower bounds
@@ -129,8 +126,7 @@ class Testproj_data(unittest.TestCase):
         # Number of evaluation points per coordinate
         n_pts = 10
 
-        x_vals = proj_xvals(theta, theta_lims, n_pts)
-        plot_data = proj_data(quadratic_1d, x_vals, theta_names, vectorized=False)
+        plot_data = proj_plot(quadratic_1d, theta, theta_lims, theta_names, n_pts, vectorized=False)
 
         # Setup the correct dataframe
         correct_x = np.array([-10.        ,  -8.88888889,  -7.77777778,  -6.66666667,

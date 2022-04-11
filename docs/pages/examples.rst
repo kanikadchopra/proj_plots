@@ -42,8 +42,8 @@ Vectorized Function
 
 .. code:: python
 
-    from projplot import projxvals
-    from projplot import projdata
+    from proj_plot import proj_xvals
+    from proj_plot import proj_data
 
     # Define vectorized function
     def obj_fun(x):
@@ -64,12 +64,18 @@ Vectorized Function
         return y
 
     # Generate first round of x_values
-    x_vals = projxvals(theta, theta_lims, n_pts)
+    x_vals = proj_xvals(theta, theta_lims, n_pts)
 
     # Obtain y_values and plots
-    plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=True)
+    plot_data = proj_data(fun=obj_fun, x_vals=x_vals, x_names=theta_names, vectorized=True)
+    proj_plot_show(plot_data, x_vline=True)
+    proj_plot_show(plot_data)
 
-Below, we have the projection plot using this data and objective function. 
+
+Below, we have the projection plot using this data and objective function with and without the vertical lines.
+
+.. image:: images/plot1b.png
+    :alt: Plot from vectorized function with x_vline
 
 .. image:: images/plot1.png
     :alt: Plot from vectorized function
@@ -78,8 +84,8 @@ Non-Vectorized Function
 ========================
 
 .. code:: python
-    from projplot import projxvals
-    from projplot import projdata
+    from proj_plot import proj_xvals
+    from proj_plot import proj_data
 
     # Define function
     def obj_fun(x):
@@ -98,11 +104,11 @@ Non-Vectorized Function
         return y
 
     # Generate first round of x_values
-    x_vals = projxvals(theta, theta_lims, n_pts)
+    x_vals = proj_xvals(theta, theta_lims, n_pts)
 
     # Obtain y_values and plots
-    plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=False)
-
+    plot_data = proj_data(fun=obj_fun, x_vals=x_vals, x_names=theta_names, vectorized=False)
+    proj_plot_shoq(plot_data)
 
 Below, we have the projection plot using this data and objective function. 
 

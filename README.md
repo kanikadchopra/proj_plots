@@ -77,7 +77,50 @@ theta_names = ["x1", "x2"]
 n_pts = 10
 ```
 
-### Vectorized Function
+This package can be used with one function or with intermediary functions for more advanced users. 
+
+### Basic Use Case
+This example will walk through how to use the main function `proj_plot()` with a vectorized function.
+
+```python
+from proj_plot import proj_plot
+
+# Define vectorized function
+def obj_fun(x):
+    '''
+    Params: 
+        x: x is a nx2 vector
+
+    Returns:
+        The output of x'Ax - 2b'x
+    '''
+    # Transpose the x vector so it is 2xn where n is 2 * number of data points 
+    x = x.T 
+    A = np.array([[3,2], [2,7]])
+    b = np.array((1,10)).T
+    
+    y = np.diag(x.T.dot(A).dot(x)) - 2 * b.dot(x)
+        
+    return y
+
+# Obtain y_values and plots without vertical x lines
+plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True)
+
+# Obtain y_values and plots with vertical x lines
+plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True, x_vline=True)
+```
+
+Below, we have the projection plot using this data and objective function. This is without the vertical lines at the optimal value. 
+<img src="docs/pages/images/plot1.png" alt = "Plot from vectorized function">
+
+This next plot is including the vertical lines at the optimal value.
+<img src="docs/pages/images/plot1b.png" alt = "Plot from vectorized function with xvline">
+
+### Advanced Use Cases
+
+In these cases, the x-value matrix, projection DataFrame and plotting are done separately. 
+
+#### Vectorized Function
 ```python
 from proj_plot import proj_xvals
 from proj_plot import proj_data
@@ -108,14 +151,11 @@ x_vals = proj_xvals(theta, theta_lims, n_pts)
 # Obtain y_values and plots
 plot_data = proj_data(obj_fun, x_vals, theta_names, vectorized=True)
 proj_plot_show(plot_data)
-
 ```
 
-Below, we have the projection plot using this data and objective function. 
+This would result in the same projection plot as the first example above. 
 
-<img src="docs/pages/images/plot1.png" alt = "Plot from vectorized function">
-
-### Non-Vectorized Function
+#### Non-Vectorized Function
 ```python
 from proj_plot import proj_xvals
 from proj_plot import proj_data
@@ -164,8 +204,14 @@ The x-value matrix generates the combinations with the varying parameters that w
 <img src="docs/pages/images/x_vals.png" alt = "Example of x-vals matrix">
 
 **Can I see the data that is plotted as a DataFrame?**
-In the examples above, you'll notice that the output of the `proj_data()` function is set in the variable `plot_data`. If we were to call the `plot_data` variable, we would have the following DataFrame outputted (based on the example above):
+In the examples above, you'll notice that the output of `proj_plot()` and `proj_data()` are assigned to the variable `plot_data`. If we were to call the `plot_data` variable, we would have the following DataFrame outputted (based on the example above):
 
 <img src="docs/pages/images/plot_data.png" alt = "Example of plot_data DataFrame">
+
+**Do I have to include names for each parameter?** 
+No, as a default if the list of names is empty, the function will label them x1,x2,...,xp based on p parameters. 
+
+**What is the point of the x_vline parameter?** 
+This allows the user to see where the solution for each parameter lies on the plot. For exxample, if the projection plot is given for values between -2 and 2 and was minimized at 0, if we believed the minimum was at -1, we would be able to visually tell that our optimization didn't work since the vertical line would not be at 0. 
 
 *This package will have a similar goal to `OptimCheck` in R.*

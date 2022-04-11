@@ -29,7 +29,7 @@ For example, if we were optimizing :math:`\theta` and :math:`\mu`, we would have
 
 This package is composed of the following functions: 
 - ``src/projplot``: contains the project directory for the projplot package. 
-- ``src/projplot/proj.py``: This file contains the functions needed to generate these varying plots. 
+- ``src/projplot/proj_plot.py``: This file contains the functions needed to generate these varying plots. 
     * ``proj_xvals()`` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
     * ``proj_plot_show()`` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
     * ``proj_data()`` will take an objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot_show`.
@@ -68,7 +68,7 @@ For example, let
 
 Then we have that the optimal solution is :math:`\hat{x} = (-0.765, 1.647)`. Now, ``projplot`` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 
-- Objective function (``obj_fun``): This can be either a vectorized or non-vectorized function. 
+-  Objective function (``obj_fun``): This can be either a vectorized or non-vectorized function. 
 -  Optimal values (``x_opt``): This will be the optimal solution for your function. 
 -  Upper and lower bounds for each parameter (``x_lims``): This will provide an initial range of values to observe.
 -  Parameter names (``x_names``): These are the names of your parameters, i.e. theta, mu, sigma
@@ -76,6 +76,8 @@ Then we have that the optimal solution is :math:`\hat{x} = (-0.765, 1.647)`. Now
 
 Setup
 ======
+
+This package can be used with one function or with intermediary functions for more advanced users. 
 
 .. code:: python
 
@@ -92,14 +94,12 @@ Setup
     n_pts = 10
 
 
-Vectorized Function
-====================
-
+Basic Use Case
+===============
+This example will walk through how to use the main function ``proj_plot()`` with a vectorized function. More details on examples using the intermediary function can be found in the Examples subsection.
 .. code:: python
 
-    from proj_plot import proj_xvals
-    from proj_plot import proj_data
-    from proj_plot import proj_plot_show
+    from proj_plot import proj_plot
 
     # Define vectorized function
     def obj_fun(x):
@@ -122,9 +122,8 @@ Vectorized Function
     # Generate first round of x_values
     x_vals = proj_xvals(theta, theta_lims, n_pts)
 
-    # Obtain y_values and plots
-    plot_data = proj_data(obj_fun, x_vals, theta_names, vectorized=True)
-    proj_plot_show(plot_data)
+    # Obtain y_values and plots with vertical x lines at optimal value
+    plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True)
 
 Below, we have the projection plot using this data and objective function. 
 

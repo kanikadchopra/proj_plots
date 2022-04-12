@@ -13,13 +13,8 @@ def proj_xvals(x_opt, x_lims, n_pts):
         x_vals (NumPy array): An array of all possible combinations of the x-values based on the limits (x_lims) and optimal values (x_opt)
 
     Example: 
-        proj_xvals(np.array([1,15]), np.array([[0,2], [10, 20]]), 3)
-        => [[0, 15],
-            [1, 15],
-            [2, 15],
-            [1, 10],
-            [1, 15],
-            [1, 20]]
+        >>> proj_xvals(np.array([1,15]), np.array([[0,2], [10, 20]]), 3)
+        [[0, 15], [1, 15], [2, 15], [1, 10], [1, 15], [1, 20]]
     """
     
     x_space = np.linspace(x_lims[:,0], x_lims[:,1], n_pts).T

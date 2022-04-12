@@ -39,16 +39,14 @@ def proj_plot_show(plot_data, x_vline=False):
     
     Produces a plot for each unique x_opt using the x and y values in plot_data
     """
-    
-    n_pts = plot_data.shape[0]
-        
+            
     grid = sns.relplot(
         data=plot_data, kind="line",
         x="x", y="y", col="x_opt",
         facet_kws=dict(sharex=False, sharey=False))
     
     if x_vline == True:
-        total_pnts, n_pts= plot_data.shape
+        n_pts= plot_data.shape[1]
         n_param = np.unique(plot_data.x_opt).shape[0]
         x_temp = np.array([plot_data.loc[(n_pts*i)+1, 'x'] for i in range(n_param)])
     
@@ -56,6 +54,8 @@ def proj_plot_show(plot_data, x_vline=False):
         for i in range(len(grid.axes.flat)):
             ax = grid.axes.flat[i]
             ax.axvline(x=x_temp[i], color='red')
+
+    return grid
 
 def proj_data(fun, x_vals, x_names=[], vectorized = False):
     """

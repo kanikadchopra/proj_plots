@@ -108,7 +108,7 @@ Non-Vectorized Function
 
     # Obtain y_values and plots
     plot_data = proj_data(fun=obj_fun, x_vals=x_vals, x_names=theta_names, vectorized=False)
-    proj_plot_shoq(plot_data)
+    proj_plot_show(plot_data)
 
 Below, we have the projection plot using this data and objective function. 
 

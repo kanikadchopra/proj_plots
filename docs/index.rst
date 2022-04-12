@@ -31,7 +31,7 @@ This package is composed of the following functions:
 - ``src/projplot``: contains the project directory for the projplot package. 
 - ``src/projplot/proj_plot.py``: This file contains the functions needed to generate these varying plots. 
     * ``proj_xvals()`` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
-    * ``proj_plot_show()`` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
+    * ``proj_plot_show()`` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. This also returns the plot handle for further customization.
     * ``proj_data()`` will take an objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot_show`.
     * ``proj_plot()`` will take an objective function, the optimal values, limits, an optional list of names, the number of points, whether the function is vectorized and whether plotting is required with a vertical line and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot_show()` if `plot=True`.
 

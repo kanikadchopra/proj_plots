@@ -14,7 +14,12 @@ def proj_xvals(x_opt, x_lims, n_pts):
 
     Example: 
         >>> proj_xvals(np.array([1,15]), np.array([[0,2], [10, 20]]), 3)
-        [[0, 15], [1, 15], [2, 15], [1, 10], [1, 15], [1, 20]]
+        array([[ 0., 15.],
+               [ 1., 15.],
+               [ 2., 15.],
+               [ 1., 10.],
+               [ 1., 15.],
+               [ 1., 20.]])
     """
     
     x_space = np.linspace(x_lims[:,0], x_lims[:,1], n_pts).T
@@ -147,3 +152,7 @@ def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plo
         proj_plot_show(plot_df, x_vline=x_vline)
     
     return plot_df
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

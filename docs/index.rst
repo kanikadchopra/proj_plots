@@ -122,13 +122,21 @@ This example will walk through how to use the main function ``proj_plot()`` with
     # Generate first round of x_values
     x_vals = proj_xvals(theta, theta_lims, n_pts)
 
-    # Obtain y_values and plots with vertical x lines at optimal value
+    # Obtain plots without vertical x lines
     plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True)
 
-Below, we have the projection plot using this data and objective function. 
+    # Obtain plots with vertical x lines
+    plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True, opt_vlines=True)
+
+
+Below, we have the projection plot using this data and objective function. This is without the vertical lines at the optimal value. 
 
 .. image:: pages/images/plot1.png
     :alt: Plot from vectorized function
+
+This next plot is including the vertical lines at the optimal value.
+.. image:: pages/images/plot1b.png
+    :alt: Plot from vectorized function with vline=True
 
 ==============================
 More Information

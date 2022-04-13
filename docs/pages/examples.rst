@@ -68,14 +68,15 @@ Vectorized Function
 
     # Obtain y_values and plots
     plot_data = proj_data(fun=obj_fun, x_vals=x_vals, x_names=theta_names, vectorized=True)
-    proj_plot_show(plot_data, x_vline=True)
+    
+    # Plot vertical line at optimal values
+    proj_plot_show(plot_data, vlines=theta)
     proj_plot_show(plot_data)
-
 
 Below, we have the projection plot using this data and objective function with and without the vertical lines.
 
 .. image:: images/plot1b.png
-    :alt: Plot from vectorized function with x_vline
+    :alt: Plot from vectorized function with vlines set to theta
 
 .. image:: images/plot1.png
     :alt: Plot from vectorized function

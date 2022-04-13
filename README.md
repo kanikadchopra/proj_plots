@@ -103,22 +103,22 @@ def obj_fun(x):
         
     return y
 
-# Obtain y_values and plots without vertical x lines
+# Obtain plots without vertical x lines
 plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True)
 
-# Obtain y_values and plots with vertical x lines
-plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True, x_vline=True)
+# Obtain plots with vertical x lines
+plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True, opt_vlines=True)
 ```
 
 Below, we have the projection plot using this data and objective function. This is without the vertical lines at the optimal value. 
 <img src="docs/pages/images/plot1.png" alt = "Plot from vectorized function">
 
 This next plot is including the vertical lines at the optimal value.
-<img src="docs/pages/images/plot1b.png" alt = "Plot from vectorized function with xvline">
+<img src="docs/pages/images/plot1b.png" alt = "Plot from vectorized function with vline=True">
 
 ### Advanced Use Cases
 
-In these cases, the x-value matrix, projection DataFrame and plotting are done separately. 
+In these cases, the x-value matrix, projection DataFrame and plotting are done separately. Another added feature is that the user is able to plot vertical lines on the projection plots by providing an array whereas with `proj_plot()` this can only be done at the optimal values. 
 
 #### Vectorized Function
 ```python
@@ -150,10 +150,12 @@ x_vals = proj_xvals(theta, theta_lims, n_pts)
 
 # Obtain y_values and plots
 plot_data = proj_data(obj_fun, x_vals, theta_names, vectorized=True)
-proj_plot_show(plot_data)
+
+# Plot vertical line at optimal values
+proj_plot_show(plot_data, vlines=theta)
 ```
 
-This would result in the same projection plot as the first example above. 
+This would result in the same projection plot as the first example above with the vertical lines.
 
 #### Non-Vectorized Function
 ```python
@@ -204,14 +206,16 @@ The x-value matrix generates the combinations with the varying parameters that w
 <img src="docs/pages/images/x_vals.png" alt = "Example of x-vals matrix">
 
 **Can I see the data that is plotted as a DataFrame?**
-In the examples above, you'll notice that the output of `proj_plot()` and `proj_data()` are assigned to the variable `plot_data`. If we were to call the `plot_data` variable, we would have the following DataFrame outputted (based on the example above):
+Yes, if you want to see the data that is being plotted as a DataFrame, you can set `plot=False` in `proj_plot()` and it will return the DataFrame of values that would have been plotted. If we were to assign this to a variable `plot_data` and call it, we would have the following DataFrame outputted (based on the example above):
 
 <img src="docs/pages/images/plot_data.png" alt = "Example of plot_data DataFrame">
 
 **Do I have to include names for each parameter?** 
 No, as a default if the list of names is empty, the function will label them x1,x2,...,xp based on p parameters. 
 
-**What is the point of the x_vline parameter?** 
+**What is the point of the opt_vlines and vlines parameters?** 
 This allows the user to see where the solution for each parameter lies on the plot. For exxample, if the projection plot is given for values between -2 and 2 and was minimized at 0, if we believed the minimum was at -1, we would be able to visually tell that our optimization didn't work since the vertical line would not be at 0. 
+
+With `proj_plot()` you are only able to plot vertical lines at the optimal values using `opt_vlines`. However, for the more advanced users, vertical lines (`vlines`) can be plotted at any values as long as an array is provided that is the length of the parameters for `proj_plot_show()`.
 
 *This package will have a similar goal to `OptimCheck` in R.*

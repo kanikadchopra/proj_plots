@@ -31,13 +31,13 @@ def proj_xvals(x_opt, x_lims, n_pts):
 
     return x_vals
 
-def proj_plot_show(plot_data, x_vline=False):
+def proj_plot_show(plot_data, vlines=None):
     """
     Args:
         plot_data (DataFrame): A DataFrame that contains columns for the calculated y-value, varying x value and the respective x_opt name associated with the varying x
-        x_vline (optional Bool): If this parameter is set to True, then a vertical line is plotted at each optimal x. The default is False.
+        vlines (optional Array): An array of x-values to plot a vertical line at for each projection plot. The length of this array should equal the number of parameters being optimized.
     
-    Produces a plot for each unique x_opt using the x and y values in plot_data
+    Produces a plot for each unique x_opt using the x and y values in plot_data with optional vertical lines.
     """
             
     grid = sns.relplot(
@@ -45,15 +45,10 @@ def proj_plot_show(plot_data, x_vline=False):
         x="x", y="y", col="x_opt",
         facet_kws=dict(sharex=False, sharey=False))
     
-    if x_vline == True:
-        n_pts= plot_data.shape[1]
-        n_param = np.unique(plot_data.x_opt).shape[0]
-        x_temp = np.array([plot_data.loc[(n_pts*i)+1, 'x'] for i in range(n_param)])
-    
-
+    if vlines is not None:
         for i in range(len(grid.axes.flat)):
             ax = grid.axes.flat[i]
-            ax.axvline(x=x_temp[i], color='red')
+            ax.axvline(x=vlines[i], color='red')
 
     return grid
 
@@ -98,7 +93,7 @@ def proj_data(fun, x_vals, x_names=[], vectorized = False):
     
     return plot_df
 
-def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plot=True, x_vline=False):
+def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plot=True, opt_vlines=False):
     """
     Args:
         fun (Python function): The objective function that is being optimized
@@ -108,12 +103,13 @@ def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plo
         n_pts (int): The number of points to plot
         vectorized (Bool): TRUE if the objective function is vectorized, else FALSE
         plot (Bool): TRUE if the user wants a plot outputted, else FALSE
-        x_vline (optional Bool): If this parameter is set to True, then a vertical line is plotted at each parameter. The default is set to False.
+        opt_vlines (Bool): If this parameter is set to True, then a vertical line is plotted at each parameter's optimal value. The default is set to False.
 
 
     Returns:
-        plot_df (DataFrame): The y-value in each projection plot appended to the x-values in a DataFrame format that's amenable to plotting
-        It will also plot the projection plots which results in a plot for each varying x_opt if plot is TRUE. 
+        plot_df (DataFrame): If plot=False, the y-value in each projection plot appended to the x-values in a DataFrame format that's amenable to plotting is returned.
+        plot (seaborn plot): If plot=True, a plot handle of the projection plots, which is a plot for each varying x_opt is returned and the plot is displayed.
+
     """
 
     # Get the x-value matrix
@@ -149,9 +145,13 @@ def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plo
     plot_df['x_opt'] = np.repeat(x_names, n_pts)
 
     if plot==True:
-        proj_plot_show(plot_df, x_vline=x_vline)
-    
-    return plot_df
+        if opt_vlines==True:
+            grid = proj_plot_show(plot_df, vlines=x_opt)
+        else:
+            grid = proj_plot_show(plot_df)
+        return grid
+    else:
+        return plot_df
 
 if __name__ == "__main__":
     import doctest

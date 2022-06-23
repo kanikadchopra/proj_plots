@@ -81,7 +81,7 @@ class Testproj_data(unittest.TestCase):
                               -8.42868128,  -0.70173865,   9.79063608,  23.04844291])
         correct_df = pd.DataFrame(
             [correct_y, correct_x, np.repeat(theta_names, n_pts)]).T
-        correct_df.columns = ['y', 'x', 'x_opt']
+        correct_df.columns = ['y', 'x', 'variable']
         correct_df["x"] = pd.to_numeric(correct_df["x"])
         correct_df["y"] = pd.to_numeric(correct_df["y"])
 
@@ -116,7 +116,7 @@ class Testproj_data(unittest.TestCase):
                               -8.42868128,  -0.70173865,   9.79063608,  23.04844291])
         correct_df = pd.DataFrame(
             [correct_y, correct_x, np.repeat(theta_names, n_pts)]).T
-        correct_df.columns = ['y', 'x', 'x_opt']
+        correct_df.columns = ['y', 'x', 'variable']
         correct_df["x"] = pd.to_numeric(correct_df["x"])
         correct_df["y"] = pd.to_numeric(correct_df["y"])
 
@@ -148,7 +148,7 @@ class Testproj_data(unittest.TestCase):
                               -9.87654321,   0.])
         correct_df = pd.DataFrame(
             [correct_y, correct_x, np.repeat(theta_names, n_pts)]).T
-        correct_df.columns = ['y', 'x', 'x_opt']
+        correct_df.columns = ['y', 'x', 'variable']
         correct_df["x"] = pd.to_numeric(correct_df["x"])
         correct_df["y"] = pd.to_numeric(correct_df["y"])
 

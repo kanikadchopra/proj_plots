@@ -1,4 +1,4 @@
-# projplot 1.0
+# projplot 1.0.0
 
 ## Breaking Changes
 

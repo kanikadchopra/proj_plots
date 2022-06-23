@@ -66,7 +66,8 @@ class Testproj_data(unittest.TestCase):
         n_pts = 10
 
         plot_data = proj_plot(vectorized_2d, theta,
-                              theta_lims, theta_names, n_pts, vectorized=True)
+                              theta_lims, theta_names, n_pts,
+                              vectorized=True, plot=False)
 
         # Setup the correct dataframe
         correct_x = np.array([-3., -2.55555556, -2.11111111, -1.66666667, -1.22222222,
@@ -100,7 +101,8 @@ class Testproj_data(unittest.TestCase):
         n_pts = 10
 
         plot_data = proj_plot(nonvectorized_2d, theta,
-                              theta_lims, theta_names, n_pts, vectorized=False)
+                              theta_lims, theta_names, n_pts,
+                              vectorized=False, plot=False)
 
         # Setup the correct dataframe
         correct_x = np.array([-3., -2.55555556, -2.11111111, -1.66666667, -1.22222222,
@@ -134,7 +136,8 @@ class Testproj_data(unittest.TestCase):
         n_pts = 10
 
         plot_data = proj_plot(quadratic_1d, theta, theta_lims,
-                              theta_names, n_pts, vectorized=False)
+                              theta_names, n_pts,
+                              vectorized=False, plot=False)
 
         # Setup the correct dataframe
         correct_x = np.array([-10.,  -8.88888889,  -7.77777778,  -6.66666667,

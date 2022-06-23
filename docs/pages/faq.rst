@@ -29,7 +29,7 @@ Do I have to include names for each parameter?
 No, as a default if the list of names is empty, the function will label them x1,x2,...,xp based on p parameters. 
 
 What is the point of the opt_vlines and vlines parameters?
-================================================
+===========================================================
 
 This allows the user to see where the solution for each parameter lies on the plot. For exxample, if the projection plot is given for values between -2 and 2 and was minimized at 0, if we believed the minimum was at -1, we would be able to visually tell that our optimization didn't work since the vertical line would not be at 0. 
 

@@ -84,6 +84,7 @@ Non-Vectorized Function
 ========================
 
 .. code:: python
+
     import projplot as pjp
 
     # Define function

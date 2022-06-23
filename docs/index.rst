@@ -94,6 +94,7 @@ This package can be used with one function or with intermediary functions for mo
 Basic Use Case
 ===============
 This example will walk through how to use the main function ``proj_plot()`` with a vectorized function. More details on examples using the intermediary function can be found in the Examples subsection.
+
 .. code:: python
 
     import projplot as pjp
@@ -132,6 +133,7 @@ Below, we have the projection plot using this data and objective function. This 
     :alt: Plot from vectorized function
 
 This next plot is including the vertical lines at the optimal value.
+
 .. image:: pages/images/plot1b.png
     :alt: Plot from vectorized function with vline=True
 

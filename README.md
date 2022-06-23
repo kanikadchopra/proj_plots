@@ -1,6 +1,6 @@
 # projplot
 
-Developed by Kanika Chopra and Dr. Martin Lysy (2022)
+*Kanika Chopra, Martin Lysy*
 
 This package is created to assist with testing optimization when building optimizers by providing additional visualizations. If a plot is pinpointed to a certain area (zoomed in) or too generalized (zoomed out), there can be misinterpretations regarding optimality. For example, a graph can look as if it has (has not) reached its optimal values despite it being the opposite. Two examples of plots that are misleading despite not being at the optimal value are given below. Figure 1 shows a plot that is too zoomed in and Figure 2 shows a plot that is too zoomed out. In both of these plots, we are misled about the optimal value. 
 
@@ -19,6 +19,9 @@ Although the optimal value calculated for x2 is is 1.647 this appears to be at 1
 
 For example, if we were optimizing `theta` and `mu`, we would have one plot where `mu` is held constant and `theta` is varying. This plot would show how the results of the objective function vary based on `theta`. By analysing this plot, we are able to determine if `theta` has reached its optimal value. An example of this plot can be found in the Examples section. 
 
+This package has a similar goal to the R package [**optimCheck**](https://github.com/mlysy/optimCheck).
+
+
 ## Documentation
 
 Read the documentation online at http://projplot.readthedocs.io/
@@ -31,18 +34,7 @@ cd docs/
 make html
 ```
 
-## Contents
-
-* `src/projplot`: contains the project directory for the projplot package. 
-* `src/projplot/proj_plot.py`: This file contains the functions needed to generate these varying plots. 
-    * `proj_xvals()` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the parameters that are being optimized. 
-    * `proj_plot_show()` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. This also returns the plot handle for further customization.
-    * `proj_data()`: will take an objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot_show`.
-    * `proj_plot()`:  will take an objective function, the optimal values, limits, an optional list of names, the number of points, whether the function is vectorized and whether plotting is required with a vertical line and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using `proj_plot_show()` if `plot=True`.
-* `tests`: containts a package to test `projplot`.
-
-
-## Examples
+## Example
 
 An overview of the package functionality is illustrated with the following example. Let `Q(x) = x^TAx - 2b^Tx` denote a quadratic objective function in `x` is in the d-dimensional real space. If `A` is a positive-definite matrix, then the unique minimum of `Q(x)` is `x̂ =A^{-1}b` (A inverse * b). 
 
@@ -83,7 +75,7 @@ This package can be used with one function or with intermediary functions for mo
 This example will walk through how to use the main function `proj_plot()` with a vectorized function.
 
 ```python
-from proj_plot import proj_plot
+import projplot as pjp
 
 # Define vectorized function
 def obj_fun(x):
@@ -104,10 +96,14 @@ def obj_fun(x):
     return y
 
 # Obtain plots without vertical x lines
-plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True)
+plot_data = pjp.proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, 
+                          x_names=theta_names, n_pts=n_pts, 
+						  vectorized=True, plot=True)
 
 # Obtain plots with vertical x lines
-plot_data = proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True, opt_vlines=True)
+plot_data = pjp.proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, 
+                          x_names=theta_names, n_pts=n_pts, 
+						  vectorized=True, plot=True, opt_vlines=True)
 ```
 
 Below, we have the projection plot using this data and objective function. This is without the vertical lines at the optimal value. 
@@ -122,11 +118,6 @@ In these cases, the x-value matrix, projection DataFrame and plotting are done s
 
 #### Vectorized Function
 ```python
-from proj_plot import proj_xvals
-from proj_plot import proj_data
-from proj_plot import proj_plot_show
-
-
 # Define vectorized function
 def obj_fun(x):
     '''
@@ -146,23 +137,19 @@ def obj_fun(x):
     return y
 
 # Generate first round of x_values
-x_vals = proj_xvals(theta, theta_lims, n_pts)
+x_vals = pjp.proj_xvals(theta, theta_lims, n_pts)
 
 # Obtain y_values and plots
-plot_data = proj_data(obj_fun, x_vals, theta_names, vectorized=True)
+plot_data = pjp.proj_data(obj_fun, x_vals, theta_names, vectorized=True)
 
 # Plot vertical line at optimal values
-proj_plot_show(plot_data, vlines=theta)
+pjp.proj_plot_show(plot_data, vlines=theta)
 ```
 
 This would result in the same projection plot as the first example above with the vertical lines.
 
 #### Non-Vectorized Function
 ```python
-from proj_plot import proj_xvals
-from proj_plot import proj_data
-from proj_plot import proj_plot_show
-
 # Define function
 def obj_fun(x):
     '''
@@ -180,11 +167,11 @@ def obj_fun(x):
     return y
 
 # Generate first round of x_values
-x_vals = proj_xvals(theta, theta_lims, n_pts)
+x_vals = pjp.proj_xvals(theta, theta_lims, n_pts)
 
 # Obtain y_values and plots
-plot_data = proj_data(obj_fun, x_vals, theta_names, vectorized=False)
-proj_plot_show(plot_data)
+plot_data = pjp.proj_data(obj_fun, x_vals, theta_names, vectorized=False)
+pjp.proj_plot_show(plot_data)
 ```
 
 Below, we have the projection plot using this data and objective function. 
@@ -218,4 +205,3 @@ This allows the user to see where the solution for each parameter lies on the pl
 
 With `proj_plot()` you are only able to plot vertical lines at the optimal values using `opt_vlines`. However, for the more advanced users, vertical lines (`vlines`) can be plotted at any values as long as an array is provided that is the length of the parameters for `proj_plot_show()`.
 
-*This package will have a similar goal to `OptimCheck` in R.*

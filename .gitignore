@@ -2,11 +2,13 @@
 .DS_Store
 
 # Folders
+/build
 /dist
-/proj_plots.egg-info
-/src/proj_plots.egg-info
-/src/projplot.egg-info
-/__pycachee__
+__pycache__/
+.tox/
 
 # Sphinx documentation
 docs/_build/
+
+# Other Python stuff
+*.egg-info

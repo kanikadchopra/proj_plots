@@ -42,8 +42,7 @@ Vectorized Function
 
 .. code:: python
 
-    from projplot import projxvals
-    from projplot import projdata
+    import projplot as pjp
 
     # Define vectorized function
     def obj_fun(x):
@@ -64,12 +63,19 @@ Vectorized Function
         return y
 
     # Generate first round of x_values
-    x_vals = projxvals(theta, theta_lims, n_pts)
+    x_vals = pjp.proj_xvals(theta, theta_lims, n_pts)
 
     # Obtain y_values and plots
-    plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=True)
+    plot_data = pjp.proj_data(fun=obj_fun, x_vals=x_vals, x_names=theta_names, vectorized=True)
+    
+    # Plot vertical line at optimal values
+    pjp.proj_plot_show(plot_data, vlines=theta)
+    pjp.proj_plot_show(plot_data)
 
-Below, we have the projection plot using this data and objective function. 
+Below, we have the projection plot using this data and objective function with and without the vertical lines.
+
+.. image:: images/plot1b.png
+    :alt: Plot from vectorized function with vlines set to theta
 
 .. image:: images/plot1.png
     :alt: Plot from vectorized function
@@ -78,8 +84,8 @@ Non-Vectorized Function
 ========================
 
 .. code:: python
-    from projplot import projxvals
-    from projplot import projdata
+
+    import projplot as pjp
 
     # Define function
     def obj_fun(x):
@@ -98,11 +104,11 @@ Non-Vectorized Function
         return y
 
     # Generate first round of x_values
-    x_vals = projxvals(theta, theta_lims, n_pts)
+    x_vals = pjp.proj_xvals(theta, theta_lims, n_pts)
 
     # Obtain y_values and plots
-    plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=False)
-
+    plot_data = pjp.proj_data(fun=obj_fun, x_vals=x_vals, x_names=theta_names, vectorized=False)
+    pjp.proj_plot_show(plot_data)
 
 Below, we have the projection plot using this data and objective function. 
 

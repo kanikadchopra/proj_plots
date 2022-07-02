@@ -23,17 +23,16 @@ Figure 2: A misleading plot due to being too zoomed in
 
 Although the optimal value calculated for :math:`x_{2}` is is 1.647 this appears to be at 1.6 for the Figure 1 and around 2 for Figure 2. 
 
-``projplot`` provides an additional visual assessment of optimality. A plot is generated for each theta value being optimized. This plot varies the respective theta value while holding the other variables constant. This helps to determine if the specific theta has been optimized based on an upper and lower limit (provided by the user). 
+``projplot`` provides an additional visual assessment of optimality. A plot is generated for each parameter being optimized. This plot varies the respective x values while holding the other variables constant. This helps to determine if the specific parameter has been optimized based on an upper and lower limit (provided by the user). 
 
 For example, if we were optimizing :math:`\theta` and :math:`\mu`, we would have one plot where :math:`\mu` is held constant and :math:`\theta` is varying. This plot would show how the results of the objective function vary based on :math:`\theta`. By analysing this plot, we are able to determine if :math:`\theta` has reached its optimal value. An example of this plot can be found below in the Usage section.
 
-This package is composed of the following functions: 
-- ``src/projplot``: contains the project directory for the projplot package. 
-- ``src/projplot/proj.py``: This file contains the functions needed to generate these varying plots. 
-    * ``projxvals()`` generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the thetas that are being optimized. 
-    * ``generate_plot()`` produces a plot for each x value based on a DataFrame containing the varying x value and corresponding calculated y. 
-    * ``projdata()``: will take a objective function and the x-value matrix generated and will create a DataFrame with the varying x-value and respective y-value. This will return the DataFrame and also plot the values using ``generate_plot``.
-- ``src/test``: containts a package to test ``projplot``.
+This package is composed of the following functions located in ``src/projplot/projplot.py``:
+
+- ``proj_plot()``: Takes an objective function, the optimal values, limits, an optional list of names, the number of points, whether the function is vectorized and whether plotting is required with a vertical line and will create a `pandas.DataFrame` with the varying x-value and respective y-value.  It will then generate the project plots if `plot=True`.  The various steps in this function are broken down in the following helper functions.
+- ``proj_xvals()``: Generates a x-value matrix that has each variation of altering one x-variable, while holding others constaint. The x-values are the variables that are being optimized. 
+- ``proj_data()`` will take an objective function and the x-value matrix generated and will create a `pandas.DataFrame` with the varying x-value and respective y-value.
+- ``proj_plot_show()``: Produces a plot for each x value based on the `pandas.DataFrame` created by ``proj_data()``.  This also returns the plot handle for further customization.
 
 More details can be found in the Function Documentation section below. 
 
@@ -41,15 +40,15 @@ More details can be found in the Function Documentation section below.
 Installation
 ==============================
 
-``pip install projplot==0.0.1``
+``pip install projplot``
 
-You can find the package listed here: https://pypi.org/project/projplot/0.0.1/
+You can find the package listed here: https://pypi.org/project/projplot/
 
 ==============================
 Usage
 ==============================
 An overview of the package functionality is illustrated with the following example. 
-Let :math:`Q(x) = x^{T}Ax - 2b^{T}x` denote a quadratic objective function and :math:`x \in \Re^{d}`. If A is a positive-definite matrix, then the unique minimum of :math:`Q(x)` is :math:`\hat{x} =A^{-1}b`.
+Let :math:`Q(x) = x^{T}Ax - 2b^{T}x` denote a quadratic objective function and :math:`x \in \Re^{d}`. If :math:`A` is a positive-definite matrix, then the unique minimum of :math:`Q(x)` is :math:`\hat{x} =A^{-1}b`.
 
 For example, let 
 
@@ -66,14 +65,16 @@ For example, let
 
 Then we have that the optimal solution is :math:`\hat{x} = (-0.765, 1.647)`. Now, ``projplot`` allows us to complete a visual check. As the user of this program, you will need to provide the following information:
 
-- Objective function (``obj_fun``): This can be either a vectorized or non-vectorized function. 
--  Optimal values (``theta``): This will be the optimal solution for your function. 
--  Upper and lower bounds for each theta (``theta_lims``): This will provide an initial range of values to observe.
--  Parameter names (``theta_names``): These are the names of your parameters, i.e. theta, mu, sigma
+-  Objective function (``obj_fun``): This can be either a vectorized or non-vectorized function. 
+-  Optimal values (``x_opt``): This will be the optimal solution for your function. 
+-  Upper and lower bounds for each parameter (``x_lims``): This will provide an initial range of values to observe.
+-  Parameter names (``x_names``): These are the names of your parameters, i.e. theta, mu, sigma
 -  Number of points to plot for each parameter (``n_pts``): This is the number of points that each parameter will be evaluated at for their respective plot. 
 
 Setup
 ======
+
+This package can be used with one function or with intermediary functions for more advanced users. 
 
 .. code:: python
 
@@ -90,13 +91,13 @@ Setup
     n_pts = 10
 
 
-Vectorized Function
-====================
+Basic Use Case
+===============
+This example will walk through how to use the main function ``proj_plot()`` with a vectorized function. More details on examples using the intermediary function can be found in the Examples subsection.
 
 .. code:: python
 
-    from projplot import projxvals
-    from projplot import projdata
+    import projplot as pjp
 
     # Define vectorized function
     def obj_fun(x):
@@ -117,15 +118,24 @@ Vectorized Function
         return y
 
     # Generate first round of x_values
-    x_vals = projxvals(theta, theta_lims, n_pts)
+    x_vals = pjp.proj_xvals(theta, theta_lims, n_pts)
 
-    # Obtain y_values and plots
-    plot_data = projdata(obj_fun, x_vals, theta_names, is_vectorized=True)
+    # Obtain plots without vertical x lines
+    plot_data = pjp.proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True)
 
-Below, we have the projection plot using this data and objective function. 
+    # Obtain plots with vertical x lines
+    plot_data = pjp.proj_plot(obj_fun, x_opt=theta, x_lims=theta_lims, x_names=theta_names, n_pts=n_pts, vectorized=True, plot=True, opt_vlines=True)
+
+
+Below, we have the projection plot using this data and objective function. This is without the vertical lines at the optimal value. 
 
 .. image:: pages/images/plot1.png
     :alt: Plot from vectorized function
+
+This next plot is including the vertical lines at the optimal value.
+
+.. image:: pages/images/plot1b.png
+    :alt: Plot from vectorized function with vline=True
 
 ==============================
 More Information

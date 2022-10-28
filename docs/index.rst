@@ -163,5 +163,5 @@ Links
 ==============================
 
 * :ref:`search`
-* Source code: https://github.com/kanikadchopra/projplot
-* Contact: kdchopra@uwaterloo.ca
+* Source code: https://github.com/mlysy/projplot
+* Contact: mlysy@uwaterloo.ca

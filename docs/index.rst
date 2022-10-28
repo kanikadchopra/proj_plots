@@ -156,7 +156,7 @@ Function Documentation
 .. toctree::
    :maxdepth: 1
 
-   source/projplot
+   autoapi/index
 
 ==============================
 Links

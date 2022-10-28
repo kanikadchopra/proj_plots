@@ -5,13 +5,15 @@ import seaborn as sns
 
 def proj_xvals(x_opt, x_lims, n_pts):
     """
+    Generate a matrix of projection plot x-values.
+
     Args:
         x_opt (NumPy array): An array of parameter values.
         x_lims (NumPy array): An array of limits or a 2 x x_opt.shape[0] matrix of lower and upper limits for each parameter.
         n_pts (int): The number of points to plot.
 
     Returns:
-        x_vals (NumPy array): An array of all possible combinations of the x-values based on the limits (x_lims) and optimal values (x_opt).
+        (NumPy array): An array of all possible combinations of the x-values based on the limits (x_lims) and optimal values (x_opt).
 
     Example: 
         >>> proj_xvals(np.array([1,15]), np.array([[0,2], [10, 20]]), 3)
@@ -35,12 +37,14 @@ def proj_xvals(x_opt, x_lims, n_pts):
 
 def proj_plot_show(plot_data, vlines=None):
     """
+    Create a projection plot based on the output of ``proj_data()``.
+
     Args:
-        plot_data (DataFrame): A DataFrame that contains columns for the calculated y-value, varying x value and the respective x_opt name associated with the varying x.
+        plot_data (DataFrame): A DataFrame that contains columns for the calculated y-value, varying x value and the respective `x_opt` name associated with the varying x.
         vlines (optional Array): An array of x-values to plot a vertical line at for each projection plot. The length of this array should equal the number of parameters being optimized.
 
     Returns:
-        A plot for each unique x_opt using the x and y values in plot_data with optional vertical lines.
+        A plot for each unique `x_opt` using the x and y values in `plot_data` with optional vertical lines.
     """
 
     grid = sns.relplot(
@@ -59,6 +63,8 @@ def proj_plot_show(plot_data, vlines=None):
 
 def proj_data(fun, x_vals, x_names=[], vectorized=False):
     """
+    Generate projection plot data from the objective function and an x-value matrix returned by ``proj_xvals()``.
+
     Args:
         fun (Python function): The objective function that is being optimized.
         x_vals (NumPy array): A matrix of the x_vals, this should be outputted from proj_xvals().
@@ -66,7 +72,7 @@ def proj_data(fun, x_vals, x_names=[], vectorized=False):
         vectorized (Bool): True if the objective function is vectorized, else False.
 
     Returns:
-        plot_df (DataFrame): pandas.DataFrame with columns `y`, `x`, and `variable` containing: the y-value in each projection plot; the corresponding x-values; and the name of the variables in `x_names`.
+        (pandas.DataFrame): DataFrame with columns `y`, `x`, and `variable` containing: the y-value in each projection plot; the corresponding x-values; and the name of the variables in `x_names`.
 
     """
     n_x = x_vals.shape[0]
@@ -102,6 +108,9 @@ def proj_data(fun, x_vals, x_names=[], vectorized=False):
 
 def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plot=True, opt_vlines=False):
     """
+
+    Generate projection plots.
+
     Args:
         fun (Python function): The objective function that is being optimized
         x_opt (NumPy array): An array of parameter values
@@ -114,7 +123,7 @@ def proj_plot(fun, x_opt, x_lims, x_names=None, n_pts=100, vectorized=False, plo
 
 
     Returns:
-        If plot=False, the y-value in each projection plot appended to the x-values in a DataFrame format that's amenable to plotting is returned.  If plot=True, a plot handle of the projection plots, which is a plot for each varying x_opt is returned and the plot is displayed.
+        If ``plot=False``, the y-value in each projection plot appended to the x-values in a DataFrame format that's amenable to plotting is returned.  If ``plot=True``, a plot handle of the projection plots, which is a plot for each varying `x_opt` is returned and the plot is displayed.
 
     """
 

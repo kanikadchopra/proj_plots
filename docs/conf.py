@@ -33,7 +33,8 @@ release = '1.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'myst_parser',
+    # 'myst_parser',
+    "myst_nb",
     'autoapi.extension',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
@@ -62,4 +63,22 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ['_static']
 
+# --- options for myst ---------------------------------------------------------
+
 myst_enable_extensions = ['html_image']
+
+nb_custom_formats = {
+    ".md": ["jupytext.reads", {"fmt": "md"}]
+}
+
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "html_image",
+]
+
+myst_title_to_header = True
+
+myst_heading_anchors = 3

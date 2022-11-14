@@ -192,11 +192,3 @@ No, as a default if the list of names is empty, the function will label them `x1
 This allows the user to see where the solution for each parameter lies on the plot. For exxample, if the projection plot is given for values between -2 and 2 and was minimized at 0, if we believed the minimum was at -1, we would be able to visually tell that our optimization didn't work since the vertical line would not be at 0. 
 
 With `projplot.proj_plot()` you are only able to plot vertical lines at the optimal values using `opt_vlines`. However, for the more advanced users, vertical lines (`vlines`) can be plotted at any values as long as an array is provided that is the length of the parameters for `projplot.proj_plot_show()`.
-
-```{toctree}
-:maxdepth: 1
-:hidden:
-
-projplot.md
-autoapi/index
-```

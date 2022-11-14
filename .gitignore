@@ -6,6 +6,7 @@
 /dist
 __pycache__/
 .tox/
+.ipynb_checkpoints
 
 # Sphinx documentation
 docs/_build/

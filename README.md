@@ -64,30 +64,6 @@ pjp.proj_plot(obj_fun, x_opt=x_opt, x_lims=x_lims,
               opt_vlines=True)
 ```
 
-This package can be used with one function or with intermediary functions for more advanced users. 
-
-### Basic Use Case
-
-This example will walk through how to use the main function `projplot.proj_plot()`.
-
-```python
-import projplot as pjp
-
-def obj_fun(x):
-    '''Compute x'Ax - 2b'x.'''
-    y = np.dot(np.dot(x.T, A), x) - 2 * np.dot(b, x)
-    return y
-
-# Obtain plots without vertical x lines
-pjp.proj_plot(obj_fun, x_opt=x_opt, x_lims=x_lims, 
-	          x_names=x_names, n_pts=n_pts)
-
-# Obtain plots with vertical x lines
-pjp.proj_plot(obj_fun, x_opt=x_opt, x_lims=x_lims, 
-              x_names=x_names, n_pts=n_pts, 
-              opt_vlines=True)
-```
-
 ![alt](docs/images/plot_vlines.png)
 
 ### Further Reading

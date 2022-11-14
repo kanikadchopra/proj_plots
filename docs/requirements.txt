@@ -1,5 +1,6 @@
 numpy
 pandas
 seaborn
+myst_nb
 sphinx_rtd_theme
 sphinx-autoapi

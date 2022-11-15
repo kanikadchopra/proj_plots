@@ -68,5 +68,5 @@ pjp.proj_plot(obj_fun, x_opt=x_opt, x_lims=x_lims,
 
 ### Further Reading
 
-See [documentation](http://projplot.readthedocs.io/) for advanced use cases and an FAQ.
+See documentation for [advanced use cases](https://projplot.readthedocs.io/en/latest/example.html#advanced-use-cases) and an [FAQ](https://projplot.readthedocs.io/en/latest/faq.html).
 
